@@ -1,16 +1,16 @@
 # life_snap
 
-A new Flutter project.
+## アプリ概要
 
-## Getting Started
+### 画面設計
+・Figmaユーザフロー
+<img width="1764" alt="image" src="https://user-images.githubusercontent.com/79580546/196298991-20f769b1-8a2c-4378-bc85-3bcc16a597a5.png">
 
-This project is a starting point for a Flutter application.
+### 状態管理：hooks_riverpod, state_notifier, freezed
+### アーキテクチャ：MVVM + Repository
 
-A few resources to get you started if this is your first Flutter project:
+## 開発の始め方
+ - リポジトリをクローンする
+ - FVMを導入する
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## プロジェクト進行について
