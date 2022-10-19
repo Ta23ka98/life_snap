@@ -30,6 +30,16 @@ iOS
  - ファイル名：GoogleService-Info.plist
    - 配置場所：ios/Runner
    - 説明：「Runner > Runner > Firebase 」にそれぞれ環境に合う様に「GoogleService-Info-Development.plist」と「GoogleService-Info-Production.plist」を配置する。Runner > Runner配下にも「GoogleService-Info.plist」は置く必要がある。Xcodeがちゃんと認識する様にインポートしないとダメです(ただ、フォルダに配置じゃ認識されません）
+   
+### 開発環境
+```
+life_snap % fvm flutter --version
+Flutter 3.3.4 • channel stable • https://github.com/flutter/flutter.git
+Framework • revision eb6d86ee27 (2 weeks ago) • 2022-10-04 22:31:45 -0700
+Engine • revision c08d7d5efc
+Tools • Dart 2.18.2 • DevTools 2.15.0
+```
+
 
 ## プロジェクト進行について
 
