@@ -41,7 +41,7 @@ class LifesnapLoginState extends State<LifesnapLogin> {
             child: Column(
               children: [
                 SizedBox(height: height / 4), //スマホごとの高さ÷4の空白を開ける
-                loginContainer(), //下で作ったlogin画面のContainerを表示（ここでは画面サイズの高さ4分の２を指定）
+                LoginContainer(), //下で作ったlogin画面のContainerを表示（ここでは画面サイズの高さ4分の２を指定）
                 SizedBox(height: height / 4) //スマホごとの高さ÷４の空白を開ける
               ],
             ),
@@ -57,14 +57,14 @@ bool _isObscure = true; //グローバル変数で真偽値を定義。後でpas
 
 //*****************************************************************
 //ログインのcontainerの作成
-class loginContainer extends StatefulWidget {
-  const loginContainer({super.key});
+class LoginContainer extends StatefulWidget {
+  const LoginContainer({super.key});
 
   @override
-  State<loginContainer> createState() => _loginContainerState();
+  State<LoginContainer> createState() => _LoginContainerState();
 }
 
-class _loginContainerState extends State<loginContainer> {
+class _LoginContainerState extends State<LoginContainer> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size; //上記を再度定義(contextの意味がいまいちわからない、、)
