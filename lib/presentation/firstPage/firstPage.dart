@@ -294,7 +294,7 @@ class _MemberRegistrationContainerState
                 padding: const EdgeInsets.all(8.0), //上述
                 child: TextFormField(
                   decoration: InputDecoration(
-                    contentPadding: EdgeInsets.symmetric(vertical: 10),
+                    contentPadding: const EdgeInsets.symmetric(vertical: 10),
                     hintText: 'PASSWORD',
                     prefixIcon: const Icon(
                       Icons.key,
