@@ -179,7 +179,7 @@ class _LoginContainerState extends State<LoginContainer> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => member_registration()));
+                          builder: (context) => MemberRegistration()));
                 },
                 child: Text(
                   '会員登録',
@@ -222,7 +222,7 @@ class MemberRegistrationState extends State<MemberRegistration> {
             child: Column(
               children: [
                 SizedBox(height: height / 6), //スマホごとの高さ÷6の空白を開ける
-                member_registration_container(),
+                MemberRegistrationContainer(),
                 SizedBox(height: height / 6) //スマホごとの高さ÷6の空白を開ける
               ],
             ),
@@ -234,16 +234,16 @@ class MemberRegistrationState extends State<MemberRegistration> {
   }
 }
 
-class member_registration_container extends StatefulWidget {
-  const member_registration_container({super.key});
+class MemberRegistrationContainer extends StatefulWidget {
+  const MemberRegistrationContainer({super.key});
 
   @override
-  State<member_registration_container> createState() =>
-      _member_registration_containerState();
+  State<MemberRegistrationContainer> createState() =>
+      _MemberRegistrationContainerState();
 }
 
-class _member_registration_containerState
-    extends State<member_registration_container> {
+class _MemberRegistrationContainerState
+    extends State<MemberRegistrationContainer> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size; //上記を再度定義
