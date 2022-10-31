@@ -10,20 +10,20 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           textTheme:
               GoogleFonts.delaGothicOneTextTheme(Theme.of(context).textTheme)),
-      home: lifesnap_login(),
+      home: LifesnapLogin(),
     );
   }
 }
 
-class lifesnap_login extends StatefulWidget {
+class LifesnapLogin extends StatefulWidget {
   //とりあえずstatefulWidgetでUIを作成
-  const lifesnap_login({super.key});
+  const LifesnapLogin({super.key});
 
   @override
-  State<lifesnap_login> createState() => _lifesnap_loginState();
+  State<LifesnapLogin> createState() => LifesnapLoginState();
 }
 
-class _lifesnap_loginState extends State<lifesnap_login> {
+class LifesnapLoginState extends State<LifesnapLogin> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size; //端末ごとの画面サイズを取得
