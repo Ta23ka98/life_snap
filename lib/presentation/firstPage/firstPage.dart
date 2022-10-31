@@ -27,7 +27,6 @@ class LifesnapLoginState extends State<LifesnapLogin> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size; //端末ごとの画面サイズを取得
-    final width = size.width; //スマホの横幅の長さを定数に格納
     final height = size.height; //スマホの縦幅の長さを定数に格納
     return Scaffold(
       body: GestureDetector(
@@ -68,7 +67,6 @@ class _LoginContainerState extends State<LoginContainer> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size; //上記を再度定義(contextの意味がいまいちわからない、、)
-    final width = size.width;
     final height = size.height;
 
     return Padding(
@@ -208,7 +206,6 @@ class MemberRegistrationState extends State<MemberRegistration> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size; //端末ごとの画面サイズを取得
-    final width = size.width; //スマホの横幅の長さを定数に格納
     final height = size.height; //スマホの縦幅の長さを定数に格納
     return Scaffold(
       body: GestureDetector(
@@ -247,7 +244,6 @@ class _MemberRegistrationContainerState
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size; //上記を再度定義
-    final width = size.width;
     final height = size.height;
     return Padding(
       padding: const EdgeInsets.only(
