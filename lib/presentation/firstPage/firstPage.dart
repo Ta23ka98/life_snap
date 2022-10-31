@@ -197,14 +197,14 @@ class _LoginContainerState extends State<LoginContainer> {
 
 //会員登録画面へ
 ////////////////////////////////////////////////////////////////////////
-class member_registration extends StatefulWidget {
-  const member_registration({super.key});
+class MemberRegistration extends StatefulWidget {
+  const MemberRegistration({super.key});
 
   @override
-  State<member_registration> createState() => _member_registrationState();
+  State<MemberRegistration> createState() => MemberRegistrationState();
 }
 
-class _member_registrationState extends State<member_registration> {
+class MemberRegistrationState extends State<MemberRegistration> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size; //端末ごとの画面サイズを取得
