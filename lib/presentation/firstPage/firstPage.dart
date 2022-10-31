@@ -53,7 +53,7 @@ class LifesnapLoginState extends State<LifesnapLogin> {
   }
 }
 
-bool _isObscure = true; //グローバル変数で真偽値を定義。後でpasswordを隠すのに使う
+bool isObscure = true; //グローバル変数で真偽値を定義。後でpasswordを隠すのに使う
 
 //*****************************************************************
 //ログインのcontainerの作成
@@ -128,18 +128,18 @@ class _LoginContainerState extends State<LoginContainer> {
                     ),
                     suffixIcon: IconButton(
                       //パスワード右端のアイコンをタップで変える。三項演算子を用いる
-                      icon: Icon(_isObscure
+                      icon: Icon(isObscure
                           ? Icons
                               .visibility_off //真偽値　? trueの時のアイコン　: falseの時のアイコン
                           : Icons.visibility),
                       onPressed: () {
                         setState(() {});
-                        _isObscure = !_isObscure; //タップで真偽値を逆にする。
+                        isObscure = !isObscure; //タップで真偽値を逆にする。
                       },
                     ),
                     border: OutlineInputBorder(),
                   ),
-                  obscureText: _isObscure, //textをtrueとfalseで見える見えないを切り替える。
+                  obscureText: isObscure, //textをtrueとfalseで見える見えないを切り替える。
                 ),
               ),
               ElevatedButton(
@@ -305,18 +305,18 @@ class _MemberRegistrationContainerState
                     ),
                     suffixIcon: IconButton(
                       //パスワード右端のアイコンをタップで変える。三項演算子を用いる
-                      icon: Icon(_isObscure
+                      icon: Icon(isObscure
                           ? Icons
                               .visibility_off //真偽値　? trueの時のアイコン　: falseの時のアイコン
                           : Icons.visibility),
                       onPressed: () {
                         setState(() {});
-                        _isObscure = !_isObscure; //タップで真偽値を逆にする。
+                        isObscure = !isObscure; //タップで真偽値を逆にする。
                       },
                     ),
                     border: OutlineInputBorder(),
                   ),
-                  obscureText: _isObscure, //textをtrueとfalseで見える見えないを切り替える。
+                  obscureText: isObscure, //textをtrueとfalseで見える見えないを切り替える。
                 ),
               ),
               ElevatedButton(
