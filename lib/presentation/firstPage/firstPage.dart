@@ -163,14 +163,13 @@ class _LoginContainerState extends State<LoginContainer> {
                           );
                         });
                   },
+                  style: ElevatedButton.styleFrom(
+                      primary: Colors.amber, //ボタンの背景色をamberに設定
+                      side: const BorderSide(color: Colors.black, width: 3)),
                   child: const Text(
                     'ログイン', //ボタンの文言を記入
                     style: TextStyle(color: Colors.black), //ボタンのテキストを黒色に変える
-                  ),
-                  style: ElevatedButton.styleFrom(
-                      primary: Colors.amber, //ボタンの背景色をamberに設定
-                      side: const BorderSide(
-                          color: Colors.black, width: 3))), //ボタンの外枠を黒くする
+                  )), //ボタンの外枠を黒くする
               ElevatedButton(
                 //上述
                 onPressed: () {
@@ -179,13 +178,13 @@ class _LoginContainerState extends State<LoginContainer> {
                       MaterialPageRoute(
                           builder: (context) => const MemberRegistration()));
                 },
+                style: ElevatedButton.styleFrom(
+                    primary: Colors.green,
+                    side: const BorderSide(color: Colors.black, width: 3)),
                 child: const Text(
                   '会員登録',
                   style: TextStyle(color: Colors.black),
                 ),
-                style: ElevatedButton.styleFrom(
-                    primary: Colors.green,
-                    side: const BorderSide(color: Colors.black, width: 3)),
               ),
             ]),
       ),
@@ -316,15 +315,16 @@ class _MemberRegistrationContainerState
                 ),
               ),
               ElevatedButton(
-                  onPressed: () {}, //ボタンを押した時の処理を書く(UIを作るだけなのでまだ未記入)
-                  child: const Text(
-                    '登録', //ボタンの文言を記入
-                    style: TextStyle(color: Colors.black), //ボタンのテキストを黒色に変える
-                  ),
+                  onPressed: () {},
                   style: ElevatedButton.styleFrom(
                       primary: Colors.amber, //ボタンの背景色をamberに設定
                       side: const BorderSide(
-                          color: Colors.black, width: 3))), //ボタンの外枠を黒くする
+                          color: Colors.black,
+                          width: 3)), //ボタンを押した時の処理を書く(UIを作るだけなのでまだ未記入)
+                  child: const Text(
+                    '登録', //ボタンの文言を記入
+                    style: TextStyle(color: Colors.black), //ボタンのテキストを黒色に変える
+                  )), //ボタンの外枠を黒くする
               IconButton(
                 onPressed: () {
                   Navigator.pop(context); //前の画面に戻る
