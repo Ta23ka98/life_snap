@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           textTheme:
               GoogleFonts.delaGothicOneTextTheme(Theme.of(context).textTheme)),
-      home: LifesnapLogin(),
+      home: const LifesnapLogin(),
     );
   }
 }
@@ -41,7 +41,7 @@ class LifesnapLoginState extends State<LifesnapLogin> {
             child: Column(
               children: [
                 SizedBox(height: height / 4), //スマホごとの高さ÷4の空白を開ける
-                LoginContainer(), //下で作ったlogin画面のContainerを表示（ここでは画面サイズの高さ4分の２を指定）
+                const LoginContainer(), //下で作ったlogin画面のContainerを表示（ここでは画面サイズの高さ4分の２を指定）
                 SizedBox(height: height / 4) //スマホごとの高さ÷４の空白を開ける
               ],
             ),
@@ -83,7 +83,7 @@ class _LoginContainerState extends State<LoginContainer> {
             border: Border.all(color: Colors.black), //containerの外枠を黒色にする
             borderRadius: BorderRadius.circular(20), //containerの角を丸くする
             color: Colors.white, //containerの背景色を白色にする
-            boxShadow: [
+            boxShadow: const [
               BoxShadow(
                 color: Colors.black, //影の色を黒色にする
                 spreadRadius: 5, //影の広がり具合を設定
@@ -97,7 +97,7 @@ class _LoginContainerState extends State<LoginContainer> {
                     .spaceEvenly //widgetの間隔を均等にする。(後で追加の項目がある場合があるのでSized Boxは使わない。)
                 ,
                 children: [
-              Text(
+              const Text(
                 'LifeSnap',
                 style: TextStyle(
                     fontSize: 50), //LifeSnapのテキストを表示(フォントが気に食わない。アイコンがあればいいかも)
@@ -121,9 +121,9 @@ class _LoginContainerState extends State<LoginContainer> {
                 padding: const EdgeInsets.all(8.0), //上述
                 child: TextFormField(
                   decoration: InputDecoration(
-                    contentPadding: EdgeInsets.symmetric(vertical: 10),
+                    contentPadding: const EdgeInsets.symmetric(vertical: 10),
                     hintText: 'PASSWORD',
-                    prefixIcon: Icon(
+                    prefixIcon: const Icon(
                       Icons.key,
                     ),
                     suffixIcon: IconButton(
@@ -137,7 +137,7 @@ class _LoginContainerState extends State<LoginContainer> {
                         isObscure = !isObscure; //タップで真偽値を逆にする。
                       },
                     ),
-                    border: OutlineInputBorder(),
+                    border: const OutlineInputBorder(),
                   ),
                   obscureText: isObscure, //textをtrueとfalseで見える見えないを切り替える。
                 ),
@@ -156,7 +156,7 @@ class _LoginContainerState extends State<LoginContainer> {
                             content: const Text('もう一度ご確認ください。'),
                             actions: <Widget>[
                               GestureDetector(
-                                child: Center(child: Text('はい')),
+                                child: const Center(child: Text('はい')),
                                 onTap: () {
                                   Navigator.pop(context);
                                 },
@@ -165,13 +165,13 @@ class _LoginContainerState extends State<LoginContainer> {
                           );
                         });
                   },
-                  child: Text(
+                  child: const Text(
                     'ログイン', //ボタンの文言を記入
                     style: TextStyle(color: Colors.black), //ボタンのテキストを黒色に変える
                   ),
                   style: ElevatedButton.styleFrom(
                       primary: Colors.amber, //ボタンの背景色をamberに設定
-                      side: BorderSide(
+                      side: const BorderSide(
                           color: Colors.black, width: 3))), //ボタンの外枠を黒くする
               ElevatedButton(
                 //上述
@@ -179,15 +179,15 @@ class _LoginContainerState extends State<LoginContainer> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => MemberRegistration()));
+                          builder: (context) => const MemberRegistration()));
                 },
-                child: Text(
+                child: const Text(
                   '会員登録',
                   style: TextStyle(color: Colors.black),
                 ),
                 style: ElevatedButton.styleFrom(
                     primary: Colors.green,
-                    side: BorderSide(color: Colors.black, width: 3)),
+                    side: const BorderSide(color: Colors.black, width: 3)),
               ),
             ]),
       ),
@@ -222,7 +222,7 @@ class MemberRegistrationState extends State<MemberRegistration> {
             child: Column(
               children: [
                 SizedBox(height: height / 6), //スマホごとの高さ÷6の空白を開ける
-                MemberRegistrationContainer(),
+                const MemberRegistrationContainer(),
                 SizedBox(height: height / 6) //スマホごとの高さ÷6の空白を開ける
               ],
             ),
@@ -261,7 +261,7 @@ class _MemberRegistrationContainerState
             border: Border.all(color: Colors.black), //containerの外枠を黒色にする
             borderRadius: BorderRadius.circular(20), //containerの角を丸くする
             color: Colors.white, //containerの背景色を白色にする
-            boxShadow: [
+            boxShadow: const [
               BoxShadow(
                 color: Colors.black, //影の色を黒色にする
                 spreadRadius: 5, //影の広がり具合を設定
@@ -275,7 +275,7 @@ class _MemberRegistrationContainerState
                     .spaceEvenly //widgetの間隔を均等にする。(後で追加の項目がある場合があるのでSized Boxは使わない。)
                 ,
                 children: [
-              Text('会員登録',
+              const Text('会員登録',
                   style: TextStyle(
                       fontSize:
                           20)), //LifeSnapのテキストを表示(フォントが気に食わない。アイコンがあればいいかも
@@ -300,7 +300,7 @@ class _MemberRegistrationContainerState
                   decoration: InputDecoration(
                     contentPadding: EdgeInsets.symmetric(vertical: 10),
                     hintText: 'PASSWORD',
-                    prefixIcon: Icon(
+                    prefixIcon: const Icon(
                       Icons.key,
                     ),
                     suffixIcon: IconButton(
@@ -314,20 +314,20 @@ class _MemberRegistrationContainerState
                         isObscure = !isObscure; //タップで真偽値を逆にする。
                       },
                     ),
-                    border: OutlineInputBorder(),
+                    border: const OutlineInputBorder(),
                   ),
                   obscureText: isObscure, //textをtrueとfalseで見える見えないを切り替える。
                 ),
               ),
               ElevatedButton(
                   onPressed: () {}, //ボタンを押した時の処理を書く(UIを作るだけなのでまだ未記入)
-                  child: Text(
+                  child: const Text(
                     '登録', //ボタンの文言を記入
                     style: TextStyle(color: Colors.black), //ボタンのテキストを黒色に変える
                   ),
                   style: ElevatedButton.styleFrom(
                       primary: Colors.amber, //ボタンの背景色をamberに設定
-                      side: BorderSide(
+                      side: const BorderSide(
                           color: Colors.black, width: 3))), //ボタンの外枠を黒くする
               IconButton(
                 onPressed: () {
