@@ -164,7 +164,7 @@ class _LoginContainerState extends State<LoginContainer> {
                         });
                   },
                   style: ElevatedButton.styleFrom(
-                      primary: Colors.amber, //ボタンの背景色をamberに設定
+                      backgroundColor: Colors.amber, //ボタンの背景色をamberに設定
                       side: const BorderSide(color: Colors.black, width: 3)),
                   child: const Text(
                     'ログイン', //ボタンの文言を記入
@@ -179,7 +179,7 @@ class _LoginContainerState extends State<LoginContainer> {
                           builder: (context) => const MemberRegistration()));
                 },
                 style: ElevatedButton.styleFrom(
-                    primary: Colors.green,
+                    backgroundColor: Colors.green,
                     side: const BorderSide(color: Colors.black, width: 3)),
                 child: const Text(
                   '会員登録',
@@ -317,7 +317,7 @@ class _MemberRegistrationContainerState
               ElevatedButton(
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(
-                      primary: Colors.amber, //ボタンの背景色をamberに設定
+                      backgroundColor: Colors.amber, //ボタンの背景色をamberに設定
                       side: const BorderSide(
                           color: Colors.black,
                           width: 3)), //ボタンを押した時の処理を書く(UIを作るだけなのでまだ未記入)
@@ -329,7 +329,7 @@ class _MemberRegistrationContainerState
                 onPressed: () {
                   Navigator.pop(context); //前の画面に戻る
                 },
-                icon: Icon(Icons.home_work_sharp),
+                icon: const Icon(Icons.home_work_sharp),
                 iconSize: 50,
               ),
             ]),
