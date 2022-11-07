@@ -1,14 +1,14 @@
 // import 'dart:io';
 // import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-// final postNotifierProvider =
-// StateNotifierProvider<PostNotifier, Post>((ref) {
-//   return PostNotifier(
+// final AddPostPageNotifierProvider =
+// StateNotifierProvider<AddPostPageNotifier, Post>((ref) {
+//   return AddPostPageNotifier(
 //     postRepository: ref.read(postRepositoyProvider),
 //   );
 // });
 //
-// class PostNotifier extends StateNotifier<Post> {
+// class AddPostPageNotifier extends StateNotifier<Post> {
 //   AddPostNotifier({
 //     required PostRepository postRepository,
 //   })  : _postRepository = postRepository,
