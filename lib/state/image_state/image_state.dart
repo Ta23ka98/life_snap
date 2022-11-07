@@ -4,6 +4,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../common/print_log.dart';
+
 part 'image_state.freezed.dart';
 
 @freezed
@@ -15,14 +17,8 @@ class ImageState with _$ImageState {
 
 final imageStateNotifierProvider =
 StateNotifierProvider.autoDispose<ImageStateNotifier, ImageState>((ref) {
-  if (kDebugMode) {
-    print('imageStateNotifierProvider init');
-  }
-  ref.onDispose(() {
-    if (kDebugMode) {
-      print('imageStateNotifierProvider dispose');
-    }
-  });
+  printLog(value: 'imageStateNotifierProvider init');
+  ref.onDispose(() => printLog(value:'imageStateNotifierProvider dispose'));
   return ImageStateNotifier();
 });
 

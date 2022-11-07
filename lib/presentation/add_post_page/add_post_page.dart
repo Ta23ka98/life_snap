@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../state/imageState/image_state.dart';
+import '../../state/image_state/image_state.dart';
 
-class PostPage extends HookConsumerWidget {
-  const PostPage({super.key});
+
+class AddPostPage extends HookConsumerWidget {
+  const AddPostPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
