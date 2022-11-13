@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:life_snap/firebase_options.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -58,6 +59,9 @@ bool isObscure = true; //グローバル変数で真偽値を定義。後でpass
 
 //*****************************************************************
 //ログインのcontainerの作成
+String loginEMail = '';
+String loginPassWord = '';
+
 class LoginContainer extends StatefulWidget {
   const LoginContainer({super.key});
 
@@ -105,6 +109,9 @@ class _LoginContainerState extends State<LoginContainer> {
               Padding(
                 padding: const EdgeInsets.all(8.0), //TextFormFieldの上下左右に余白を入れる
                 child: TextFormField(
+                  onChanged: (value) {
+                    loginEMail = value;
+                  },
                   decoration: const InputDecoration(
                     //TextFormFieldの形を変える
                     contentPadding: EdgeInsets.symmetric(
@@ -120,6 +127,9 @@ class _LoginContainerState extends State<LoginContainer> {
               Padding(
                 padding: const EdgeInsets.all(8.0), //上述
                 child: TextFormField(
+                  onChanged: (value) {
+                    loginPassWord = value;
+                  },
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.symmetric(vertical: 10),
                     hintText: 'PASSWORD',
@@ -143,27 +153,18 @@ class _LoginContainerState extends State<LoginContainer> {
                 ),
               ),
               ElevatedButton(
-                  onPressed: () {
-                    showDialog(
-                        //ダイアログを表示させる。本来であればメールアドレスとパスワードが一致すれば画面遷移し、ログイン状態をキープできるようにする。
-                        context: context,
-                        builder: (context) {
-                          return AlertDialog(
-                            shape: const RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(20.0))),
-                            title: const Text('メールアドレスとパスワードが一致しません。'),
-                            content: const Text('もう一度ご確認ください。'),
-                            actions: <Widget>[
-                              GestureDetector(
-                                child: const Center(child: Text('はい')),
-                                onTap: () {
-                                  Navigator.pop(context);
-                                },
-                              ),
-                            ],
-                          );
-                        });
+                  onPressed: () async {
+                    try {
+                      final User? user = (await FirebaseAuth.instance
+                              .signInWithEmailAndPassword(
+                                  email: loginEMail, password: loginPassWord))
+                          .user;
+                      if (user != null) {
+                        print('ログイン完了');
+                      }
+                    } catch (e) {
+                      print('エラー');
+                    }
                   },
                   style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.amber, //ボタンの背景色をamberに設定
@@ -196,6 +197,10 @@ class _LoginContainerState extends State<LoginContainer> {
 
 //会員登録画面へ
 ////////////////////////////////////////////////////////////////////////
+
+String eMail = '';
+String passWord = '';
+
 class MemberRegistration extends StatefulWidget {
   const MemberRegistration({super.key});
 
@@ -279,6 +284,9 @@ class _MemberRegistrationContainerState
               Padding(
                 padding: const EdgeInsets.all(8.0), //TextFormFieldの上下左右に余白を入れる
                 child: TextFormField(
+                  onChanged: (String value) {
+                    eMail = value;
+                  },
                   decoration: const InputDecoration(
                     //TextFormFieldの形を変える
                     contentPadding: EdgeInsets.symmetric(
@@ -294,6 +302,9 @@ class _MemberRegistrationContainerState
               Padding(
                 padding: const EdgeInsets.all(8.0), //上述
                 child: TextFormField(
+                  onChanged: (String value) {
+                    passWord = value;
+                  },
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.symmetric(vertical: 10),
                     hintText: 'PASSWORD',
@@ -317,7 +328,17 @@ class _MemberRegistrationContainerState
                 ),
               ),
               ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () async {
+                    try {
+                      final User? user = (await FirebaseAuth.instance
+                              .createUserWithEmailAndPassword(
+                                  email: eMail, password: passWord))
+                          .user;
+                      if (user != null) {}
+                    } catch (e) {
+                      print('エラー');
+                    }
+                  },
                   style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.amber, //ボタンの背景色をamberに設定
                       side: const BorderSide(
