@@ -158,9 +158,11 @@ class _LoginContainerState extends State<LoginContainer> {
                                   email: loginEMail, password: loginPassWord))
                           .user;
                       if (user != null) {
+                        // ignore: avoid_print
                         print('ログイン完了');
                       }
                     } catch (e) {
+                      // ignore: avoid_print
                       print('エラー');
                     }
                   },
@@ -334,6 +336,7 @@ class _MemberRegistrationContainerState
                           .user;
                       if (user != null) {}
                     } catch (e) {
+                      // ignore: avoid_print
                       print('エラー');
                     }
                   },
