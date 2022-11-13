@@ -107,6 +107,7 @@ class _LoginContainerState extends State<LoginContainer> {
               Padding(
                 padding: const EdgeInsets.all(8.0), //TextFormFieldの上下左右に余白を入れる
                 child: TextFormField(
+                  keyboardType: TextInputType.emailAddress,
                   onChanged: (value) {
                     loginEMail = value;
                   },
@@ -284,6 +285,7 @@ class _MemberRegistrationContainerState
               Padding(
                 padding: const EdgeInsets.all(8.0), //TextFormFieldの上下左右に余白を入れる
                 child: TextFormField(
+                  keyboardType: TextInputType.emailAddress,
                   onChanged: (String value) {
                     eMail = value;
                   },
