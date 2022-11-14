@@ -45,6 +45,7 @@ dependencies:
   geoflutterfire2: ^2.3.13
   ar_location_view: ^2.0.3
   geolocator: ^9.0.2
+  firebase_auth: ^4.1.2
 
 dev_dependencies:
   flutter_test:
