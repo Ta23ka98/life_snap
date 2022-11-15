@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:life_snap/common/print_log.dart';
 import 'package:life_snap/domain/entity/post.dart';
 import 'package:life_snap/infrastructure/provider/firebase_providers.dart';
 
@@ -10,6 +11,9 @@ final postCollectionReferenceProvider =
 });
 
 final postsReferenceWithConverterProvider = Provider.autoDispose((ref) {
+  printLog(value: "postsReferenceWithConverterProvider init");
+  ref.onDispose(
+      () => printLog(value: "postsReferenceWithConverterProvider dispose"));
   return ref.read(postCollectionReferenceProvider).withConverter<Post>(
         fromFirestore: (docs, _) => Post.fromDocument(docs),
         toFirestore: ((post, _) {

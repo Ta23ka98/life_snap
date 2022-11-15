@@ -18,6 +18,7 @@ abstract class BasePostRepository {
     required GeoFirePoint point,
     required File imageFile,
   });
+  Future<void> deletePost({required Post post});
 }
 
 class PostRepository implements BasePostRepository {
@@ -35,6 +36,7 @@ class PostRepository implements BasePostRepository {
       required String postImageURL,
       required GeoFirePoint point,
       required File imageFile}) async {
+
     final _postReference = _docRef.doc();
     final _imageUrl = await _imageRepository.uploadImage(
         uid: _postReference.id, image: imageFile, isCamera: isCamera);
@@ -49,5 +51,10 @@ class PostRepository implements BasePostRepository {
       geoHash: point.hash,
     );
     await newPost.postReference!.set(newPost);
+  }
+
+  @override
+  Future<void> deletePost({required Post post}) async {
+    await post.postReference!.delete();
   }
 }
