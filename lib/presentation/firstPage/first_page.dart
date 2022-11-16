@@ -57,8 +57,6 @@ bool isObscure = true; //グローバル変数で真偽値を定義。後でpass
 
 //*****************************************************************
 //ログインのcontainerの作成
-String loginEMail = '';
-String loginPassWord = '';
 
 class LoginContainer extends StatefulWidget {
   const LoginContainer({super.key});
@@ -70,6 +68,8 @@ class LoginContainer extends StatefulWidget {
 class _LoginContainerState extends State<LoginContainer> {
   @override
   Widget build(BuildContext context) {
+    String loginEMail = '';
+    String loginPassWord = '';
     final size = MediaQuery.of(context).size; //上記を再度定義(contextの意味がいまいちわからない、、)
     final height = size.height;
 
@@ -199,9 +199,6 @@ class _LoginContainerState extends State<LoginContainer> {
 //会員登録画面へ
 ////////////////////////////////////////////////////////////////////////
 
-String eMail = '';
-String passWord = '';
-
 class MemberRegistration extends StatefulWidget {
   const MemberRegistration({super.key});
 
@@ -210,6 +207,8 @@ class MemberRegistration extends StatefulWidget {
 }
 
 class MemberRegistrationState extends State<MemberRegistration> {
+  String eMail = '';
+  String passWord = '';
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size; //端末ごとの画面サイズを取得
@@ -248,6 +247,8 @@ class MemberRegistrationContainer extends StatefulWidget {
 
 class _MemberRegistrationContainerState
     extends State<MemberRegistrationContainer> {
+  String eMail = '';
+  String passWord = '';
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size; //上記を再度定義
