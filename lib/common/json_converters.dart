@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:life_snap/domain/entity/post/post_position.dart';
 
 // DocumentReferenceの変換
 class DocumentReferenceConverter
@@ -14,14 +15,27 @@ class DocumentReferenceConverter
 }
 
 // GeoPointの変換
-class GeoPointConverter implements JsonConverter<GeoPoint, GeoPoint> {
-  const GeoPointConverter();
+class GeoFirePointConverter implements JsonConverter<GeoPoint, GeoPoint> {
+  const GeoFirePointConverter();
 
   @override
   GeoPoint fromJson(GeoPoint geopoint) => geopoint;
 
   @override
   GeoPoint toJson(GeoPoint geopoint) => geopoint;
+}
+
+class GeoPositionConverter
+    implements JsonConverter<PostPosition, Map<String, Object?>> {
+  const GeoPositionConverter();
+
+  @override
+  PostPosition fromJson(Map<String, Object?> position) =>
+      PostPosition.fromJson(position);
+
+  @override
+  Map<String, Object?> toJson(PostPosition position) =>
+      {'geopoint': position.geoPoint, 'geohash': position.geoHash};
 }
 
 // Timestampの変換

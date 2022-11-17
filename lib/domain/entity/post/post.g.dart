@@ -7,31 +7,37 @@ part of 'post.dart';
 // **************************************************************************
 
 _$_Post _$$_PostFromJson(Map<String, dynamic> json) => _$_Post(
-      postReference: _$JsonConverterFromJson<DocumentReference<Object?>,
+      id: json['id'] as String,
+      postUserRef: _$JsonConverterFromJson<DocumentReference<Object?>,
               DocumentReference<Object?>>(
-          json['postReference'], const DocumentReferenceConverter().fromJson),
-      postUserId: json['postUserId'] as String,
+          json['postUserRef'], const DocumentReferenceConverter().fromJson),
+      postRef: _$JsonConverterFromJson<DocumentReference<Object?>,
+              DocumentReference<Object?>>(
+          json['postRef'], const DocumentReferenceConverter().fromJson),
       title: json['title'] as String,
       content: json['content'] as String,
-      postImageURL: json['postImageURL'] as String,
+      postImageURL: json['postImageURL'] as String?,
       likeCount: json['likeCount'] as int? ?? 0,
-      point: const GeoPointConverter().fromJson(json['point'] as GeoPoint),
-      geoHash: json['geoHash'] as String,
+      postPosition: _$JsonConverterFromJson<Map<String, Object?>, PostPosition>(
+          json['postPosition'], const GeoPositionConverter().fromJson),
       createdAt:
           const TimestampConverter().fromJson(json['createdAt'] as Timestamp?),
     );
 
 Map<String, dynamic> _$$_PostToJson(_$_Post instance) => <String, dynamic>{
-      'postReference': _$JsonConverterToJson<DocumentReference<Object?>,
+      'id': instance.id,
+      'postUserRef': _$JsonConverterToJson<DocumentReference<Object?>,
               DocumentReference<Object?>>(
-          instance.postReference, const DocumentReferenceConverter().toJson),
-      'postUserId': instance.postUserId,
+          instance.postUserRef, const DocumentReferenceConverter().toJson),
+      'postRef': _$JsonConverterToJson<DocumentReference<Object?>,
+              DocumentReference<Object?>>(
+          instance.postRef, const DocumentReferenceConverter().toJson),
       'title': instance.title,
       'content': instance.content,
       'postImageURL': instance.postImageURL,
       'likeCount': instance.likeCount,
-      'point': const GeoPointConverter().toJson(instance.point),
-      'geoHash': instance.geoHash,
+      'postPosition': _$JsonConverterToJson<Map<String, Object?>, PostPosition>(
+          instance.postPosition, const GeoPositionConverter().toJson),
       'createdAt': const TimestampConverter().toJson(instance.createdAt),
     };
 

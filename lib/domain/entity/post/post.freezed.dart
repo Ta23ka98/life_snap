@@ -20,17 +20,18 @@ Post _$PostFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Post {
+  String get id => throw _privateConstructorUsedError;
   @DocumentReferenceConverter()
-  DocumentReference<Object?>? get postReference =>
+  DocumentReference<Object?>? get postUserRef =>
       throw _privateConstructorUsedError;
-  String get postUserId => throw _privateConstructorUsedError;
-  String get title => throw _privateConstructorUsedError;
-  String get content => throw _privateConstructorUsedError;
-  String get postImageURL => throw _privateConstructorUsedError;
-  int? get likeCount => throw _privateConstructorUsedError;
-  @GeoPointConverter()
-  GeoPoint get point => throw _privateConstructorUsedError;
-  String get geoHash => throw _privateConstructorUsedError;
+  @DocumentReferenceConverter()
+  DocumentReference<Object?>? get postRef => throw _privateConstructorUsedError;
+  String get title => throw _privateConstructorUsedError; // タイトル
+  String get content => throw _privateConstructorUsedError; // 投稿内容
+  String? get postImageURL => throw _privateConstructorUsedError; // 投稿写真のURL
+  int? get likeCount => throw _privateConstructorUsedError; // いいね数
+  @GeoPositionConverter()
+  PostPosition? get postPosition => throw _privateConstructorUsedError;
   @TimestampConverter()
   DateTime? get createdAt => throw _privateConstructorUsedError;
 
@@ -45,15 +46,17 @@ abstract class $PostCopyWith<$Res> {
       _$PostCopyWithImpl<$Res, Post>;
   @useResult
   $Res call(
-      {@DocumentReferenceConverter() DocumentReference<Object?>? postReference,
-      String postUserId,
+      {String id,
+      @DocumentReferenceConverter() DocumentReference<Object?>? postUserRef,
+      @DocumentReferenceConverter() DocumentReference<Object?>? postRef,
       String title,
       String content,
-      String postImageURL,
+      String? postImageURL,
       int? likeCount,
-      @GeoPointConverter() GeoPoint point,
-      String geoHash,
+      @GeoPositionConverter() PostPosition? postPosition,
       @TimestampConverter() DateTime? createdAt});
+
+  $PostPositionCopyWith<$Res>? get postPosition;
 }
 
 /// @nodoc
@@ -69,25 +72,29 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? postReference = freezed,
-    Object? postUserId = null,
+    Object? id = null,
+    Object? postUserRef = freezed,
+    Object? postRef = freezed,
     Object? title = null,
     Object? content = null,
-    Object? postImageURL = null,
+    Object? postImageURL = freezed,
     Object? likeCount = freezed,
-    Object? point = null,
-    Object? geoHash = null,
+    Object? postPosition = freezed,
     Object? createdAt = freezed,
   }) {
     return _then(_value.copyWith(
-      postReference: freezed == postReference
-          ? _value.postReference
-          : postReference // ignore: cast_nullable_to_non_nullable
-              as DocumentReference<Object?>?,
-      postUserId: null == postUserId
-          ? _value.postUserId
-          : postUserId // ignore: cast_nullable_to_non_nullable
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as String,
+      postUserRef: freezed == postUserRef
+          ? _value.postUserRef
+          : postUserRef // ignore: cast_nullable_to_non_nullable
+              as DocumentReference<Object?>?,
+      postRef: freezed == postRef
+          ? _value.postRef
+          : postRef // ignore: cast_nullable_to_non_nullable
+              as DocumentReference<Object?>?,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -96,27 +103,35 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as String,
-      postImageURL: null == postImageURL
+      postImageURL: freezed == postImageURL
           ? _value.postImageURL
           : postImageURL // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       likeCount: freezed == likeCount
           ? _value.likeCount
           : likeCount // ignore: cast_nullable_to_non_nullable
               as int?,
-      point: null == point
-          ? _value.point
-          : point // ignore: cast_nullable_to_non_nullable
-              as GeoPoint,
-      geoHash: null == geoHash
-          ? _value.geoHash
-          : geoHash // ignore: cast_nullable_to_non_nullable
-              as String,
+      postPosition: freezed == postPosition
+          ? _value.postPosition
+          : postPosition // ignore: cast_nullable_to_non_nullable
+              as PostPosition?,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $PostPositionCopyWith<$Res>? get postPosition {
+    if (_value.postPosition == null) {
+      return null;
+    }
+
+    return $PostPositionCopyWith<$Res>(_value.postPosition!, (value) {
+      return _then(_value.copyWith(postPosition: value) as $Val);
+    });
   }
 }
 
@@ -127,15 +142,18 @@ abstract class _$$_PostCopyWith<$Res> implements $PostCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {@DocumentReferenceConverter() DocumentReference<Object?>? postReference,
-      String postUserId,
+      {String id,
+      @DocumentReferenceConverter() DocumentReference<Object?>? postUserRef,
+      @DocumentReferenceConverter() DocumentReference<Object?>? postRef,
       String title,
       String content,
-      String postImageURL,
+      String? postImageURL,
       int? likeCount,
-      @GeoPointConverter() GeoPoint point,
-      String geoHash,
+      @GeoPositionConverter() PostPosition? postPosition,
       @TimestampConverter() DateTime? createdAt});
+
+  @override
+  $PostPositionCopyWith<$Res>? get postPosition;
 }
 
 /// @nodoc
@@ -147,25 +165,29 @@ class __$$_PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res, _$_Post>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? postReference = freezed,
-    Object? postUserId = null,
+    Object? id = null,
+    Object? postUserRef = freezed,
+    Object? postRef = freezed,
     Object? title = null,
     Object? content = null,
-    Object? postImageURL = null,
+    Object? postImageURL = freezed,
     Object? likeCount = freezed,
-    Object? point = null,
-    Object? geoHash = null,
+    Object? postPosition = freezed,
     Object? createdAt = freezed,
   }) {
     return _then(_$_Post(
-      postReference: freezed == postReference
-          ? _value.postReference
-          : postReference // ignore: cast_nullable_to_non_nullable
-              as DocumentReference<Object?>?,
-      postUserId: null == postUserId
-          ? _value.postUserId
-          : postUserId // ignore: cast_nullable_to_non_nullable
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as String,
+      postUserRef: freezed == postUserRef
+          ? _value.postUserRef
+          : postUserRef // ignore: cast_nullable_to_non_nullable
+              as DocumentReference<Object?>?,
+      postRef: freezed == postRef
+          ? _value.postRef
+          : postRef // ignore: cast_nullable_to_non_nullable
+              as DocumentReference<Object?>?,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -174,22 +196,18 @@ class __$$_PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res, _$_Post>
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as String,
-      postImageURL: null == postImageURL
+      postImageURL: freezed == postImageURL
           ? _value.postImageURL
           : postImageURL // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       likeCount: freezed == likeCount
           ? _value.likeCount
           : likeCount // ignore: cast_nullable_to_non_nullable
               as int?,
-      point: null == point
-          ? _value.point
-          : point // ignore: cast_nullable_to_non_nullable
-              as GeoPoint,
-      geoHash: null == geoHash
-          ? _value.geoHash
-          : geoHash // ignore: cast_nullable_to_non_nullable
-              as String,
+      postPosition: freezed == postPosition
+          ? _value.postPosition
+          : postPosition // ignore: cast_nullable_to_non_nullable
+              as PostPosition?,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -202,44 +220,49 @@ class __$$_PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res, _$_Post>
 @JsonSerializable()
 class _$_Post implements _Post {
   _$_Post(
-      {@DocumentReferenceConverter() this.postReference,
-      required this.postUserId,
+      {required this.id,
+      @DocumentReferenceConverter() this.postUserRef,
+      @DocumentReferenceConverter() this.postRef,
       required this.title,
       required this.content,
-      required this.postImageURL,
+      this.postImageURL,
       this.likeCount = 0,
-      @GeoPointConverter() required this.point,
-      required this.geoHash,
+      @GeoPositionConverter() this.postPosition,
       @TimestampConverter() this.createdAt});
 
   factory _$_Post.fromJson(Map<String, dynamic> json) => _$$_PostFromJson(json);
 
   @override
-  @DocumentReferenceConverter()
-  final DocumentReference<Object?>? postReference;
+  final String id;
   @override
-  final String postUserId;
+  @DocumentReferenceConverter()
+  final DocumentReference<Object?>? postUserRef;
+  @override
+  @DocumentReferenceConverter()
+  final DocumentReference<Object?>? postRef;
   @override
   final String title;
+// タイトル
   @override
   final String content;
+// 投稿内容
   @override
-  final String postImageURL;
+  final String? postImageURL;
+// 投稿写真のURL
   @override
   @JsonKey()
   final int? likeCount;
+// いいね数
   @override
-  @GeoPointConverter()
-  final GeoPoint point;
-  @override
-  final String geoHash;
+  @GeoPositionConverter()
+  final PostPosition? postPosition;
   @override
   @TimestampConverter()
   final DateTime? createdAt;
 
   @override
   String toString() {
-    return 'Post(postReference: $postReference, postUserId: $postUserId, title: $title, content: $content, postImageURL: $postImageURL, likeCount: $likeCount, point: $point, geoHash: $geoHash, createdAt: $createdAt)';
+    return 'Post(id: $id, postUserRef: $postUserRef, postRef: $postRef, title: $title, content: $content, postImageURL: $postImageURL, likeCount: $likeCount, postPosition: $postPosition, createdAt: $createdAt)';
   }
 
   @override
@@ -247,26 +270,26 @@ class _$_Post implements _Post {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Post &&
-            (identical(other.postReference, postReference) ||
-                other.postReference == postReference) &&
-            (identical(other.postUserId, postUserId) ||
-                other.postUserId == postUserId) &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.postUserRef, postUserRef) ||
+                other.postUserRef == postUserRef) &&
+            (identical(other.postRef, postRef) || other.postRef == postRef) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.content, content) || other.content == content) &&
             (identical(other.postImageURL, postImageURL) ||
                 other.postImageURL == postImageURL) &&
             (identical(other.likeCount, likeCount) ||
                 other.likeCount == likeCount) &&
-            (identical(other.point, point) || other.point == point) &&
-            (identical(other.geoHash, geoHash) || other.geoHash == geoHash) &&
+            (identical(other.postPosition, postPosition) ||
+                other.postPosition == postPosition) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, postReference, postUserId, title,
-      content, postImageURL, likeCount, point, geoHash, createdAt);
+  int get hashCode => Object.hash(runtimeType, id, postUserRef, postRef, title,
+      content, postImageURL, likeCount, postPosition, createdAt);
 
   @JsonKey(ignore: true)
   @override
@@ -284,39 +307,41 @@ class _$_Post implements _Post {
 
 abstract class _Post implements Post {
   factory _Post(
-      {@DocumentReferenceConverter()
-          final DocumentReference<Object?>? postReference,
-      required final String postUserId,
+      {required final String id,
+      @DocumentReferenceConverter()
+          final DocumentReference<Object?>? postUserRef,
+      @DocumentReferenceConverter()
+          final DocumentReference<Object?>? postRef,
       required final String title,
       required final String content,
-      required final String postImageURL,
+      final String? postImageURL,
       final int? likeCount,
-      @GeoPointConverter()
-          required final GeoPoint point,
-      required final String geoHash,
+      @GeoPositionConverter()
+          final PostPosition? postPosition,
       @TimestampConverter()
           final DateTime? createdAt}) = _$_Post;
 
   factory _Post.fromJson(Map<String, dynamic> json) = _$_Post.fromJson;
 
   @override
-  @DocumentReferenceConverter()
-  DocumentReference<Object?>? get postReference;
+  String get id;
   @override
-  String get postUserId;
+  @DocumentReferenceConverter()
+  DocumentReference<Object?>? get postUserRef;
+  @override
+  @DocumentReferenceConverter()
+  DocumentReference<Object?>? get postRef;
   @override
   String get title;
-  @override
+  @override // タイトル
   String get content;
-  @override
-  String get postImageURL;
-  @override
+  @override // 投稿内容
+  String? get postImageURL;
+  @override // 投稿写真のURL
   int? get likeCount;
-  @override
-  @GeoPointConverter()
-  GeoPoint get point;
-  @override
-  String get geoHash;
+  @override // いいね数
+  @GeoPositionConverter()
+  PostPosition? get postPosition;
   @override
   @TimestampConverter()
   DateTime? get createdAt;
