@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:life_snap/presentation/add_post_page/add_post_page.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -12,7 +11,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           textTheme:
               GoogleFonts.delaGothicOneTextTheme(Theme.of(context).textTheme)),
-      home: const AddPostPage(),
+      home: const LifesnapLogin(),
     );
   }
 }
