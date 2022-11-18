@@ -108,7 +108,7 @@ class AddPostPage extends HookConsumerWidget {
                       minLines: 7,
                       maxLines: 7,
                       validator: (value) =>
-                          value!.trim().isEmpty || value.trim().length >= 10
+                          value!.trim().isEmpty || value.trim().length >= 150
                               ? "1文字以上、150文字以下で投稿内容を入力してください。"
                               : null,
                       decoration: const InputDecoration(
