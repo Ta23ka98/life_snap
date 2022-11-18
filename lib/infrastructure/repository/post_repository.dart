@@ -1,60 +1,49 @@
-import 'dart:io';
-
-import 'package:geoflutterfire2/geoflutterfire2.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:life_snap/domain/entity/post.dart';
+import 'package:life_snap/domain/entity/post/post.dart';
 import 'package:life_snap/infrastructure/provider/post_providers.dart';
-import 'package:life_snap/infrastructure/repository/image_repositrory.dart';
 
-final postRepositoryProvider =
-    Provider.autoDispose<PostRepository>((ref) => PostRepository(ref));
+final postRepositoryProvider = Provider.autoDispose<PostRepository>((ref) =>
+    PostRepository(
+        collectionReference: ref.read(postCollectionReferenceProvider)));
 
 abstract class BasePostRepository {
-  Future<void> addPost({
-    required bool isCamera,
-    required String title,
-    required String content,
-    required String postImageURL,
-    required GeoFirePoint point,
-    required File imageFile,
-  });
-  Future<void> deletePost({required Post post});
+  DocumentReference getDocumentRef();
+  Future<Post> getData(String id);
+  Future<void> insert(Post post);
+  Future<void> update(Post post);
+  Future<void> delete(Post post);
 }
 
 class PostRepository implements BasePostRepository {
-  PostRepository(this._ref);
+  PostRepository({required CollectionReference collectionReference})
+      : _collectionReference = collectionReference;
 
-  final ProviderRef _ref;
-  late final _docRef = _ref.read(postsReferenceWithConverterProvider);
-  late final _imageRepository = _ref.read(imageRepositoryProvider);
-  final _postUserId = ""; //firebaseAuthからuid取得
+  final CollectionReference _collectionReference;
+
   @override
-  Future<void> addPost(
-      {required bool isCamera,
-      required String title,
-      required String content,
-      required String postImageURL,
-      required GeoFirePoint point,
-      required File imageFile}) async {
-
-    final _postReference = _docRef.doc();
-    final _imageUrl = await _imageRepository.uploadImage(
-        uid: _postReference.id, image: imageFile, isCamera: isCamera);
-
-    final newPost = Post(
-      postUserId: _postUserId,
-      title: title,
-      content: content,
-      postImageURL: _imageUrl,
-      postReference: _postReference,
-      point: point.geoPoint,
-      geoHash: point.hash,
-    );
-    await newPost.postReference!.set(newPost);
+  DocumentReference getDocumentRef() {
+    return _collectionReference.doc();
   }
 
   @override
-  Future<void> deletePost({required Post post}) async {
-    await post.postReference!.delete();
+  Future<Post> getData(String id) async {
+    final docs = await _collectionReference.doc(id).get();
+    return Post.fromDocument(docs);
+  }
+
+  @override
+  Future<void> insert(Post post) async {
+    await post.postRef!.set(post.toJson());
+  }
+
+  @override
+  Future<void> update(Post post) async {
+    await post.postRef!.update(post.toJson());
+  }
+
+  @override
+  Future<void> delete(Post post) async {
+    await post.postRef!.delete();
   }
 }
