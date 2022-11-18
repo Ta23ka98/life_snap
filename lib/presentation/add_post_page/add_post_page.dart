@@ -15,6 +15,7 @@ class AddPostPage extends HookConsumerWidget {
     final _formKey = GlobalKey<FormState>();
     final _titleController = useTextEditingController(text: '');
     final _contentController = useTextEditingController(text: '');
+
     final _imageNotifier = ref.watch(imageStateNotifierProvider.notifier);
     final _imageFile =
         ref.watch(imageStateNotifierProvider.select((s) => s.imageFile));
@@ -79,7 +80,9 @@ class AddPostPage extends HookConsumerWidget {
                       controller: _titleController,
                       keyboardType: TextInputType.multiline,
                       validator: (value) =>
-                          value!.trim().isEmpty ? 'タイトルを入力してください。' : null,
+                          value!.trim().isEmpty || value.trim().length >= 10
+                              ? "1文字以上、10文字以下でタイトルを入力してください。"
+                              : null,
                       decoration: const InputDecoration(
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
@@ -105,7 +108,9 @@ class AddPostPage extends HookConsumerWidget {
                       minLines: 7,
                       maxLines: 7,
                       validator: (value) =>
-                          value!.trim().isEmpty ? '投稿内容を入力してください。' : null,
+                          value!.trim().isEmpty || value.trim().length >= 10
+                              ? "1文字以上、150文字以下で投稿内容を入力してください。"
+                              : null,
                       decoration: const InputDecoration(
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
