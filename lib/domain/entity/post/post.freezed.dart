@@ -23,15 +23,16 @@ mixin _$Post {
   String get id => throw _privateConstructorUsedError;
   @DocumentReferenceConverter()
   DocumentReference<Object?>? get postUserRef =>
-      throw _privateConstructorUsedError;
+      throw _privateConstructorUsedError; // userのReference
   @DocumentReferenceConverter()
-  DocumentReference<Object?>? get postRef => throw _privateConstructorUsedError;
+  DocumentReference<Object?>? get postRef =>
+      throw _privateConstructorUsedError; // postのReference
   String get title => throw _privateConstructorUsedError; // タイトル
   String get content => throw _privateConstructorUsedError; // 投稿内容
   String? get postImageURL => throw _privateConstructorUsedError; // 投稿写真のURL
   int? get likeCount => throw _privateConstructorUsedError; // いいね数
   @GeoPositionConverter()
-  PostPosition? get postPosition => throw _privateConstructorUsedError;
+  PostPosition? get postPosition => throw _privateConstructorUsedError; // 位置座標
   @TimestampConverter()
   DateTime? get createdAt => throw _privateConstructorUsedError;
 
@@ -237,9 +238,11 @@ class _$_Post implements _Post {
   @override
   @DocumentReferenceConverter()
   final DocumentReference<Object?>? postUserRef;
+// userのReference
   @override
   @DocumentReferenceConverter()
   final DocumentReference<Object?>? postRef;
+// postのReference
   @override
   final String title;
 // タイトル
@@ -256,6 +259,7 @@ class _$_Post implements _Post {
   @override
   @GeoPositionConverter()
   final PostPosition? postPosition;
+// 位置座標
   @override
   @TimestampConverter()
   final DateTime? createdAt;
@@ -328,10 +332,10 @@ abstract class _Post implements Post {
   @override
   @DocumentReferenceConverter()
   DocumentReference<Object?>? get postUserRef;
-  @override
+  @override // userのReference
   @DocumentReferenceConverter()
   DocumentReference<Object?>? get postRef;
-  @override
+  @override // postのReference
   String get title;
   @override // タイトル
   String get content;
@@ -342,7 +346,7 @@ abstract class _Post implements Post {
   @override // いいね数
   @GeoPositionConverter()
   PostPosition? get postPosition;
-  @override
+  @override // 位置座標
   @TimestampConverter()
   DateTime? get createdAt;
   @override

@@ -4,6 +4,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:life_snap/common/functions.dart';
 import 'package:life_snap/presentation/add_post_page/add_post_page_notifier.dart';
+import 'package:life_snap/presentation/ar_screen_page/ar_screen_page.dart';
 
 import '../../state/image_state/image_state.dart';
 
@@ -156,7 +157,12 @@ class AddPostPage extends HookConsumerWidget {
                                 content: _contentController.text,
                                 image: _imageFile!,
                                 position: _position.value);
-                            Navigator.pop(context);
+                            // Navigator.pop(context);
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: ((context) =>
+                                        const ArScreenPage())));
                           }
                         }),
                   ],
