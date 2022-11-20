@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:life_snap/presentation/bottom_navigation/my_page.dart';
-import 'package:life_snap/presentation/bottom_navigation/search_page.dart';
+
+import '../map_page/map_page.dart';
 
 enum TabItem {
   search(
     title: '探す',
     icon: Icons.search,
-    page: SearchPage(),
+    page: MapPage(),
   ),
 
   mypage(
