@@ -9,7 +9,7 @@ final postRepositoryProvider = Provider.autoDispose<PostRepository>((ref) =>
 
 abstract class BasePostRepository {
   DocumentReference getDocumentRef();
-  Future<Post> getData(String id);
+  Future<Post?> getData(String id);
   Future<void> insert(Post post);
   Future<void> update(Post post);
   Future<void> delete(Post post);
@@ -27,9 +27,13 @@ class PostRepository implements BasePostRepository {
   }
 
   @override
-  Future<Post> getData(String id) async {
+  Future<Post?> getData(String id) async {
     final docs = await _collectionReference.doc(id).get();
-    return Post.fromDocument(docs);
+    try {
+      return Post.fromDocument(docs);
+    } catch (e) {
+      return null;
+    }
   }
 
   @override
