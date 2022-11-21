@@ -18,8 +18,8 @@ class PostCard extends HookConsumerWidget {
         useState<bool>(false); // 仮でboolで定義　いいねしたpostのIdと投稿のpostのIdの比較をする
 
     useEffect(() {
-      Future.delayed(const Duration(seconds: 0), () async {
-        _vm.setPost(annotation.post);
+      Future(() async {
+        await _vm.setPost(annotation.post);
       });
       return null;
     }, []);

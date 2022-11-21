@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:geoflutterfire2/geoflutterfire2.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:life_snap/common/print_log.dart';
 import 'package:life_snap/domain/entity/post/post.dart';
-import 'package:life_snap/infrastructure/provider/post_providers.dart';
+import 'package:life_snap/infrastructure/repository/image_repositrory.dart';
+import 'package:life_snap/infrastructure/repository/post_repository.dart';
 import 'package:life_snap/state/annotation_state/annotation.dart';
 import 'package:life_snap/state/annotation_state/annotations_state.dart';
 
@@ -13,32 +13,27 @@ final arScreenPageNotifierProvider =
         (ref) {
   printLog(value: 'arScreenPageNotifierProvider init');
   ref.onDispose(() => printLog(value: 'arScreenPageNotifierProvider dispose'));
+
   return ArScreenPageNotifier(
-      collectionReference: ref.read(postCollectionReferenceProvider));
+    postRepository: ref.read(postRepositoryProvider),
+    imageRepository: ref.read(imageRepositoryProvider),
+  );
 });
 
 class ArScreenPageNotifier extends StateNotifier<AnnotationsState> {
-  ArScreenPageNotifier({required CollectionReference collectionReference})
-      : _collectionReference = collectionReference,
+  ArScreenPageNotifier(
+      {required PostRepository postRepository,
+      required ImageRepository imageRepository})
+      : _postRepository = postRepository,
+        _imageRepository = imageRepository,
         super(const AnnotationsState());
 
-  final CollectionReference _collectionReference;
-  late GeoFlutterFire geo;
-
-// 範囲内の投稿を取得
-  Stream<List<DocumentSnapshot>> getSearchPost(Position position) {
-    geo = GeoFlutterFire();
-    GeoFirePoint currentLocation =
-        geo.point(latitude: position.latitude, longitude: position.longitude);
-    double radius = 1; //1km
-    return geo
-        .collection(collectionRef: _collectionReference)
-        .within(center: currentLocation, radius: radius, field: 'postPosition');
-  }
+  final PostRepository _postRepository;
+  final ImageRepository _imageRepository;
 
 // 取得した情報をAnnotationsに追加
   Future<void> getAnnotations(Position position) async {
-    final stream = getSearchPost(position);
+    final stream = _postRepository.getSearchPost(position: position);
     stream.listen((List<DocumentSnapshot> documentList) {
       final annotationList = documentList.map((docs) {
         final post = Post.fromDocument(docs);

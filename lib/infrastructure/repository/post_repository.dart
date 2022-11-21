@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:geoflutterfire2/geoflutterfire2.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:life_snap/domain/entity/post/post.dart';
 import 'package:life_snap/infrastructure/provider/post_providers.dart';
@@ -13,6 +15,7 @@ abstract class BasePostRepository {
   Future<void> insert(Post post);
   Future<void> update(Post post);
   Future<void> delete(Post post);
+  Stream<List<DocumentSnapshot>> getSearchPost({required Position position});
 }
 
 class PostRepository implements BasePostRepository {
@@ -20,6 +23,7 @@ class PostRepository implements BasePostRepository {
       : _collectionReference = collectionReference;
 
   final CollectionReference _collectionReference;
+  late GeoFlutterFire geo;
 
   @override
   DocumentReference getDocumentRef() {
@@ -45,5 +49,17 @@ class PostRepository implements BasePostRepository {
   @override
   Future<void> delete(Post post) async {
     await post.postRef!.delete();
+  }
+
+  @override
+  Stream<List<DocumentSnapshot<Object?>>> getSearchPost(
+      {required Position position}) {
+    geo = GeoFlutterFire();
+    GeoFirePoint currentLocation =
+        geo.point(latitude: position.latitude, longitude: position.longitude);
+    double radius = 1; //1km
+    return geo
+        .collection(collectionRef: _collectionReference)
+        .within(center: currentLocation, radius: radius, field: 'postPosition');
   }
 }
