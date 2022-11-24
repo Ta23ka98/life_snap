@@ -47,6 +47,8 @@ dependencies:
   geoflutterfire2: ^2.3.13
   ar_location_view: ^2.0.3
   geolocator: ^9.0.2
+  image_network: ^2.5.1
+  favorite_button: ^0.0.4
 
 dev_dependencies:
   flutter_test:
