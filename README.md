@@ -32,6 +32,13 @@ iOS
    - 配置場所：ios/Runner
    - 説明：「Runner > Runner > Firebase 」にそれぞれ環境に合う様に「GoogleService-Info-Development.plist」と「GoogleService-Info-Production.plist」を配置する。Runner > Runner配下にも「GoogleService-Info.plist」は置く必要がある。Xcodeがちゃんと認識する様にインポートしないとダメです(ただ、フォルダに配置じゃ認識されません）
    
+   
+## GoogleMapのAPIキーについて
+[こちらの記事を参考](https://codelabs.developers.google.com/codelabs/google-maps-in-flutter?hl=ja#3)に、Slackにピン留めしたAPIキーを入力する。
+
+＊前もってpullでdevelopブランチを最新にし、作業ブランチを最新にしておくこと
+
+
 ### 開発環境
 ```
 life_snap % fvm flutter --version
