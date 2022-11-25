@@ -25,11 +25,8 @@ class ArScreenPageNotifier extends StateNotifier<AnnotationsState> {
       {required PostRepository postRepository,
       required ImageRepository imageRepository})
       : _postRepository = postRepository,
-        _imageRepository = imageRepository,
         super(const AnnotationsState());
-
   final PostRepository _postRepository;
-  final ImageRepository _imageRepository;
 
 // 取得した情報をAnnotationsに追加
   Future<void> getAnnotations(Position position) async {
