@@ -7,7 +7,8 @@
 
 ＊詳細は[こちらのリンク](https://www.figma.com/file/e5JHz48twSTKI0Fum7KxLF/LifeSnap?node-id=0%3A1&t=fQs7kqAevqu8tYau-0)で確認
 
-<img width="648" alt="スクリーンショット 2022-11-25 19 06 16" src="https://user-images.githubusercontent.com/79580546/203958580-dc5a8b99-091a-4b33-b9d7-3a09638bec88.png">
+<img width="630" alt="スクリーンショット 2022-11-25 20 15 42" src="https://user-images.githubusercontent.com/79580546/203974111-a107c759-4ad3-43a6-88cc-416e7e0a28b0.png">
+
 
 
 ### 状態管理：hooks_riverpod, state_notifier, freezed
