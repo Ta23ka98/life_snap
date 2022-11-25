@@ -4,7 +4,10 @@
 
 ### 画面設計
 ・Figmaユーザフロー
-<img width="730" alt="スクリーンショット 2022-11-15 17 43 41" src="https://user-images.githubusercontent.com/79580546/201872026-f2a7493e-9bf5-440e-ac53-c590e5f8298f.png">
+
+＊詳細は[こちらのリンク](https://www.figma.com/file/e5JHz48twSTKI0Fum7KxLF/LifeSnap?node-id=0%3A1&t=fQs7kqAevqu8tYau-0)で確認
+
+<img width="648" alt="スクリーンショット 2022-11-25 19 06 16" src="https://user-images.githubusercontent.com/79580546/203958580-dc5a8b99-091a-4b33-b9d7-3a09638bec88.png">
 
 
 ### 状態管理：hooks_riverpod, state_notifier, freezed
