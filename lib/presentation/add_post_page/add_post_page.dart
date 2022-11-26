@@ -6,6 +6,7 @@ import 'package:life_snap/common/functions.dart';
 import 'package:life_snap/presentation/add_post_page/add_post_page_notifier.dart';
 
 import '../../state/image_state/image_state.dart';
+import 'widget/circular_widget.dart';
 
 class AddPostPage extends HookConsumerWidget {
   const AddPostPage({super.key});
@@ -29,6 +30,7 @@ class AddPostPage extends HookConsumerWidget {
         speed: 0,
         speedAccuracy: 0));
     final vm = ref.watch(addPostPageNotifierProvider.notifier);
+    final _isLoading = useState<bool>(false);
 
     useEffect(() {
       Future.delayed(const Duration(seconds: 0), () async {
@@ -130,35 +132,38 @@ class AddPostPage extends HookConsumerWidget {
                       ),
                     ),
                     const SizedBox(height: 40.0),
-                    ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          padding: const EdgeInsets.only(
-                              left: 120, top: 10, right: 120, bottom: 10),
-                          elevation: 1.0,
-                          textStyle: TextStyle(
-                            color: Colors.white,
-                            backgroundColor: Theme.of(context).primaryColor,
+                    Stack(alignment: AlignmentDirectional.center, children: [
+                      ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            padding: const EdgeInsets.only(
+                                left: 120, top: 10, right: 120, bottom: 10),
+                            elevation: 1.0,
+                            textStyle: TextStyle(
+                              color: Colors.white,
+                              backgroundColor: Theme.of(context).primaryColor,
+                            ),
                           ),
-                        ),
-                        child: const Text(
-                          '投稿する',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 24.0,
-                          ),
-                        ),
-                        onPressed: () async {
-                          if (_formKey.currentState!.validate()) {
-                            _formKey.currentState!.save();
-                            // Post投稿処理
-                            await vm.addPost(
-                                title: _titleController.text,
-                                content: _contentController.text,
-                                image: _imageFile!,
-                                position: _position.value);
+                          onPressed: () async {
+                            if (_formKey.currentState!.validate()) {
+                              _formKey.currentState!.save();
+                              _isLoading.value = true;
+                              await vm.addPost(
+                                  title: _titleController.text,
+                                  content: _contentController.text,
+                                  image: _imageFile!,
+                                  position: _position.value);
+                            }
                             Navigator.pop(context);
-                          }
-                        }),
+                          },
+                          child: const Text(
+                            '投稿する',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 24.0,
+                            ),
+                          )),
+                      if (_isLoading.value) const CircularWidget()
+                    ]),
                   ],
                 ),
               ),
