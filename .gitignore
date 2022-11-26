@@ -55,9 +55,9 @@ ios/firebase_app_id_file.json
 macos/Runner/GoogleService-Info.plist
 macos/firebase_app_id_file.json
 
+#fvm related
+.fvm/flutter_sdk
+
 # google-map apiKey
 ios/Runner/AppDelegate.swift
 android/app/src/main/AndroidManifest.xml
-
-#fvm related
-.fvm/flutter_sdk
