@@ -42,6 +42,12 @@ iOS
 
 ＊前もってpullでdevelopブランチを最新にし、作業ブランチを最新にしておくこと
 
+## APIキーに係るファイル名と配置場所
+
+・ios/Runner/AppDelegate.swift
+・android/app/src/main/AndroidManifest.xml
+(developからpullしても残っている場合、配置しなくてもよい)
+
 
 ### 開発環境
 ```
