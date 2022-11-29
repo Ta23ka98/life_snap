@@ -4,7 +4,11 @@
 
 ### 画面設計
 ・Figmaユーザフロー
-<img width="730" alt="スクリーンショット 2022-11-15 17 43 41" src="https://user-images.githubusercontent.com/79580546/201872026-f2a7493e-9bf5-440e-ac53-c590e5f8298f.png">
+
+＊詳細は[こちらのリンク](https://www.figma.com/file/e5JHz48twSTKI0Fum7KxLF/LifeSnap?node-id=0%3A1&t=fQs7kqAevqu8tYau-0)で確認
+
+<img width="630" alt="スクリーンショット 2022-11-25 20 15 42" src="https://user-images.githubusercontent.com/79580546/203974111-a107c759-4ad3-43a6-88cc-416e7e0a28b0.png">
+
 
 
 ### 状態管理：hooks_riverpod, state_notifier, freezed
@@ -32,6 +36,19 @@ iOS
    - 配置場所：ios/Runner
    - 説明：「Runner > Runner > Firebase 」にそれぞれ環境に合う様に「GoogleService-Info-Development.plist」と「GoogleService-Info-Production.plist」を配置する。Runner > Runner配下にも「GoogleService-Info.plist」は置く必要がある。Xcodeがちゃんと認識する様にインポートしないとダメです(ただ、フォルダに配置じゃ認識されません）
    
+   
+## GoogleMapのAPIキーについて
+[こちらの記事を参考](https://codelabs.developers.google.com/codelabs/google-maps-in-flutter?hl=ja#3)に、Slackにピン留めしたAPIキーを入力する。
+
+＊前もってpullでdevelopブランチを最新にし、作業ブランチを最新にしておくこと
+
+## APIキーに係るファイル名と配置場所
+
+・ios/Runner/AppDelegate.swift
+・android/app/src/main/AndroidManifest.xml
+(developからpullしても残っている場合、配置しなくてもよい)
+
+
 ### 開発環境
 ```
 life_snap % fvm flutter --version
