@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:life_snap/presentation/my_page/recertification_page.dart';
 
 class MyPageTentative extends StatefulWidget {
   const MyPageTentative({super.key});
@@ -33,8 +34,10 @@ class _ProfileState extends State<Profile> {
     final width = size.width;
     return GestureDetector(
         onTap: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: ((context) => const Segue())));
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: ((context) => const ReCertificationPage())));
         },
         child: Container(
           height: height / 8,
@@ -56,21 +59,5 @@ class _ProfileState extends State<Profile> {
             ],
           ),
         ));
-  }
-}
-
-class Segue extends StatefulWidget {
-  const Segue({super.key});
-
-  @override
-  State<Segue> createState() => _SegueState();
-}
-
-class _SegueState extends State<Segue> {
-  @override
-  Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Text('遷移先'),
-    );
   }
 }
