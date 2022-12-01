@@ -20,12 +20,7 @@ class _PostCardState extends State<PostCard> {
       onTap: (() => Navigator.push(
             context,
             MaterialPageRoute(
-              builder: ((context) => const CheckPostPage(
-                    title: "投稿の説明",
-                    imageURL: imgURL,
-                    countNum: 35,
-                    explainText: "にゃんにゃんにゃんにゃんにゃんにゃんにゃんにゃんにゃん",
-                  )),
+              builder: ((context) => const CheckPostPage()),
             ),
           )),
       child: Container(
