@@ -13,7 +13,7 @@ class _MyPageTentativeState extends State<MyPageTentative> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
-        children: const [SizedBox(height: 100), Profile()],
+        children: const [SizedBox(height: 100), SegueProfile()],
       ),
     );
   }
