@@ -14,7 +14,8 @@ abstract class BaseLikeRepository {
   Future<String> getId({required String uid, required String id});
   Future<bool> isLikes({required String uid, required String id});
   Future<List<String>> getIds({required String uid});
-  Future<void> insert({required String uid, required Like like});
+  Future<void> insert(
+      {required String uid, required String id, required Like like});
   Future<void> delete({required String uid, required String id});
   Future<void> deleteAll({required List<String> ids, required String uid});
 }
@@ -58,9 +59,10 @@ class LikeRepository implements BaseLikeRepository {
   }
 
   @override
-  Future<void> insert({required String uid, required Like like}) async {
+  Future<void> insert(
+      {required String uid, required String id, required Like like}) async {
     final likeRef = getCollectionRef(uid: uid);
-    await likeRef.add(like);
+    await likeRef.doc(id).set(like.toJson());
   }
 
   @override

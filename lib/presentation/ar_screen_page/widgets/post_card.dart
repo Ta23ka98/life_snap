@@ -24,7 +24,7 @@ class PostCard extends HookConsumerWidget {
         await _likeVm.isLikes(post: annotation.post);
       });
       return null;
-    }, [annotation.post]);
+    }, []);
 
     return GestureDetector(
       onTap: (() => Navigator.push(context,
