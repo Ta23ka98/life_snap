@@ -16,7 +16,7 @@ abstract class BaseLikeRepository {
   Future<List<String>> getIds({required String uid});
   Future<void> insert({required String uid, required Like like});
   Future<void> delete({required String uid, required String id});
-  Future<void> deleteAll({required String uid});
+  Future<void> deleteAll({required List<String> ids, required String uid});
 }
 
 class LikeRepository implements BaseLikeRepository {
@@ -70,8 +70,8 @@ class LikeRepository implements BaseLikeRepository {
   }
 
   @override
-  Future<void> deleteAll({required String uid}) async {
-    final ids = await getIds(uid: uid);
+  Future<void> deleteAll(
+      {required List<String> ids, required String uid}) async {
     for (var id in ids) {
       await delete(uid: uid, id: id);
     }
