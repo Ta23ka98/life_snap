@@ -1,5 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:life_snap/domain/entity/like/like.dart';
+import 'package:life_snap/domain/entity/post/post.dart';
+import 'package:life_snap/infrastructure/provider/auth_provider.dart';
+import 'package:life_snap/infrastructure/repository/like_repository.dart';
 
 import '../../common/print_log.dart';
 
@@ -14,9 +19,47 @@ final likeStateNotifierProvider =
     StateNotifierProvider.autoDispose<LikeStateNotifier, LikeState>((ref) {
   printLog(value: 'likeStateNotifierProvider init');
   ref.onDispose(() => printLog(value: 'likeStateNotifierProvider dispose'));
-  return LikeStateNotifier();
+  return LikeStateNotifier(
+    user: ref.read(userProvider),
+    likeRepository: ref.read(likeRepositoryProvider),
+  );
 });
 
 class LikeStateNotifier extends StateNotifier<LikeState> {
-  LikeStateNotifier() : super(const LikeState());
+  LikeStateNotifier(
+      {required User? user, required LikeRepository likeRepository})
+      : _user = user,
+        _likeRepository = likeRepository,
+        super(const LikeState());
+
+  final User? _user;
+  final LikeRepository _likeRepository;
+
+  Future<void> isLikes({required Post post}) async {
+    if (_user == null) return;
+    final isFavolit =
+        await _likeRepository.isLikes(uid: _user!.uid, id: post.id);
+    state = state.copyWith(isFavolit: isFavolit);
+  }
+
+  Future<void> setLike({required Post post}) async {
+    if (_user == null) return;
+    final newLike = Like(id: post.id, createdAt: DateTime.now());
+    await _likeRepository.insert(
+      uid: _user!.uid,
+      like: newLike,
+    );
+    state = state.copyWith(isFavolit: true);
+  }
+
+  Future<void> deleteLike({required Post post}) async {
+    if (_user == null) return;
+    await _likeRepository.delete(id: post.id, uid: _user!.uid);
+    state = state.copyWith(isFavolit: false);
+  }
+
+  Future<void> deleteAll() async {
+    if (_user == null) return;
+    await _likeRepository.deleteAll(uid: _user!.uid);
+  }
 }

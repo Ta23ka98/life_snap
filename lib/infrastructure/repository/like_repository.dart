@@ -1,21 +1,22 @@
-import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:life_snap/domain/entity/like/like.dart';
-import 'package:life_snap/infrastructure/provider/like_providers.dart';
+
+import '../provider/app_user_providers.dart';
 
 final likeRepositoryProvider = Provider.autoDispose<LikeRepository>((ref) {
   return LikeRepository(
-      collectionReference: ref.read(likeCollectionReferenceProvider("")));
+      collectionReference: ref.read(userCollectionReferenceProvider));
 });
 
 abstract class BaseLikeRepository {
-  DocumentReference getDocumentRef();
-  Future<List<String>> getIds();
-  Future<Like> insert({required Like like});
-  Future<void> delete({required String id});
-  Future<void> deleteAll();
+  CollectionReference getCollectionRef({required String uid});
+  Future<String> getId({required String uid, required String id});
+  Future<bool> isLikes({required String uid, required String id});
+  Future<List<String>> getIds({required String uid});
+  Future<void> insert({required String uid, required Like like});
+  Future<void> delete({required String uid, required String id});
+  Future<void> deleteAll({required String uid});
 }
 
 class LikeRepository implements BaseLikeRepository {
@@ -25,35 +26,54 @@ class LikeRepository implements BaseLikeRepository {
   final CollectionReference _collectionReference;
 
   @override
-  DocumentReference getDocumentRef() {
-    return _collectionReference.doc();
+  CollectionReference getCollectionRef({required String uid}) {
+    return _collectionReference.doc(uid).collection("myLikes");
   }
 
   @override
-  Future<List<String>> getIds() async {
-    final snapshot = await _collectionReference.get();
+  Future<bool> isLikes({required String uid, required String id}) async {
+    final likeRef = getCollectionRef(uid: uid);
+    final docs = await likeRef.doc(id).get();
+    if (docs.data() != null) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  @override
+  Future<String> getId({required String uid, required String id}) async {
+    final likeRef = getCollectionRef(uid: uid);
+    final docs = await likeRef.doc(id).get();
+    return docs.id;
+  }
+
+  @override
+  Future<List<String>> getIds({required String uid}) async {
+    final likeRef = getCollectionRef(uid: uid);
+    final snapshot = await likeRef.get();
     return snapshot.docs.map((doc) {
       return doc.id;
     }).toList();
   }
 
   @override
-  Future<Like> insert({required Like like}) async {
-    await _collectionReference.add(like);
-    final docs = await _collectionReference.doc(like.id).get();
-    return Like.fromDocument(docs);
+  Future<void> insert({required String uid, required Like like}) async {
+    final likeRef = getCollectionRef(uid: uid);
+    await likeRef.add(like);
   }
 
   @override
-  Future<void> delete({required String id}) async {
-    await _collectionReference.doc(id).delete();
+  Future<void> delete({required String uid, required String id}) async {
+    final likeRef = getCollectionRef(uid: uid);
+    await likeRef.doc(id).delete();
   }
 
   @override
-  Future<void> deleteAll() async {
-    final ids = await getIds();
+  Future<void> deleteAll({required String uid}) async {
+    final ids = await getIds(uid: uid);
     for (var id in ids) {
-      await delete(id: id);
+      await delete(uid: uid, id: id);
     }
   }
 }

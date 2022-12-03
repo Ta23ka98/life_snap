@@ -20,13 +20,7 @@ Like _$LikeFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Like {
-  String? get id => throw _privateConstructorUsedError;
-  @DocumentReferenceConverter()
-  DocumentReference<Object?>? get postUserRef =>
-      throw _privateConstructorUsedError; // userのReference
-  @DocumentReferenceConverter()
-  DocumentReference<Object?>? get postRef =>
-      throw _privateConstructorUsedError; // postのReference
+  String? get id => throw _privateConstructorUsedError; // likeした投稿ID
   @TimestampConverter()
   DateTime? get createdAt => throw _privateConstructorUsedError;
 
@@ -40,11 +34,7 @@ abstract class $LikeCopyWith<$Res> {
   factory $LikeCopyWith(Like value, $Res Function(Like) then) =
       _$LikeCopyWithImpl<$Res, Like>;
   @useResult
-  $Res call(
-      {String? id,
-      @DocumentReferenceConverter() DocumentReference<Object?>? postUserRef,
-      @DocumentReferenceConverter() DocumentReference<Object?>? postRef,
-      @TimestampConverter() DateTime? createdAt});
+  $Res call({String? id, @TimestampConverter() DateTime? createdAt});
 }
 
 /// @nodoc
@@ -61,8 +51,6 @@ class _$LikeCopyWithImpl<$Res, $Val extends Like>
   @override
   $Res call({
     Object? id = freezed,
-    Object? postUserRef = freezed,
-    Object? postRef = freezed,
     Object? createdAt = freezed,
   }) {
     return _then(_value.copyWith(
@@ -70,14 +58,6 @@ class _$LikeCopyWithImpl<$Res, $Val extends Like>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
-      postUserRef: freezed == postUserRef
-          ? _value.postUserRef
-          : postUserRef // ignore: cast_nullable_to_non_nullable
-              as DocumentReference<Object?>?,
-      postRef: freezed == postRef
-          ? _value.postRef
-          : postRef // ignore: cast_nullable_to_non_nullable
-              as DocumentReference<Object?>?,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -92,11 +72,7 @@ abstract class _$$_LikeCopyWith<$Res> implements $LikeCopyWith<$Res> {
       __$$_LikeCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String? id,
-      @DocumentReferenceConverter() DocumentReference<Object?>? postUserRef,
-      @DocumentReferenceConverter() DocumentReference<Object?>? postRef,
-      @TimestampConverter() DateTime? createdAt});
+  $Res call({String? id, @TimestampConverter() DateTime? createdAt});
 }
 
 /// @nodoc
@@ -109,8 +85,6 @@ class __$$_LikeCopyWithImpl<$Res> extends _$LikeCopyWithImpl<$Res, _$_Like>
   @override
   $Res call({
     Object? id = freezed,
-    Object? postUserRef = freezed,
-    Object? postRef = freezed,
     Object? createdAt = freezed,
   }) {
     return _then(_$_Like(
@@ -118,14 +92,6 @@ class __$$_LikeCopyWithImpl<$Res> extends _$LikeCopyWithImpl<$Res, _$_Like>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
-      postUserRef: freezed == postUserRef
-          ? _value.postUserRef
-          : postUserRef // ignore: cast_nullable_to_non_nullable
-              as DocumentReference<Object?>?,
-      postRef: freezed == postRef
-          ? _value.postRef
-          : postRef // ignore: cast_nullable_to_non_nullable
-              as DocumentReference<Object?>?,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -137,31 +103,20 @@ class __$$_LikeCopyWithImpl<$Res> extends _$LikeCopyWithImpl<$Res, _$_Like>
 /// @nodoc
 @JsonSerializable()
 class _$_Like implements _Like {
-  _$_Like(
-      {this.id,
-      @DocumentReferenceConverter() this.postUserRef,
-      @DocumentReferenceConverter() this.postRef,
-      @TimestampConverter() this.createdAt});
+  _$_Like({this.id, @TimestampConverter() this.createdAt});
 
   factory _$_Like.fromJson(Map<String, dynamic> json) => _$$_LikeFromJson(json);
 
   @override
   final String? id;
-  @override
-  @DocumentReferenceConverter()
-  final DocumentReference<Object?>? postUserRef;
-// userのReference
-  @override
-  @DocumentReferenceConverter()
-  final DocumentReference<Object?>? postRef;
-// postのReference
+// likeした投稿ID
   @override
   @TimestampConverter()
   final DateTime? createdAt;
 
   @override
   String toString() {
-    return 'Like(id: $id, postUserRef: $postUserRef, postRef: $postRef, createdAt: $createdAt)';
+    return 'Like(id: $id, createdAt: $createdAt)';
   }
 
   @override
@@ -170,17 +125,13 @@ class _$_Like implements _Like {
         (other.runtimeType == runtimeType &&
             other is _$_Like &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.postUserRef, postUserRef) ||
-                other.postUserRef == postUserRef) &&
-            (identical(other.postRef, postRef) || other.postRef == postRef) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, postUserRef, postRef, createdAt);
+  int get hashCode => Object.hash(runtimeType, id, createdAt);
 
   @JsonKey(ignore: true)
   @override
@@ -199,24 +150,13 @@ class _$_Like implements _Like {
 abstract class _Like implements Like {
   factory _Like(
       {final String? id,
-      @DocumentReferenceConverter()
-          final DocumentReference<Object?>? postUserRef,
-      @DocumentReferenceConverter()
-          final DocumentReference<Object?>? postRef,
-      @TimestampConverter()
-          final DateTime? createdAt}) = _$_Like;
+      @TimestampConverter() final DateTime? createdAt}) = _$_Like;
 
   factory _Like.fromJson(Map<String, dynamic> json) = _$_Like.fromJson;
 
   @override
   String? get id;
-  @override
-  @DocumentReferenceConverter()
-  DocumentReference<Object?>? get postUserRef;
-  @override // userのReference
-  @DocumentReferenceConverter()
-  DocumentReference<Object?>? get postRef;
-  @override // postのReference
+  @override // likeした投稿ID
   @TimestampConverter()
   DateTime? get createdAt;
   @override

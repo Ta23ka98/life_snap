@@ -8,10 +8,7 @@ part 'like.g.dart';
 @freezed
 class Like with _$Like {
   factory Like({
-    String? id,
-    @DocumentReferenceConverter()
-        DocumentReference? postUserRef, // userのReference
-    @DocumentReferenceConverter() DocumentReference? postRef, // postのReference
+    String? id, // likeした投稿ID
     @TimestampConverter() DateTime? createdAt, // 投稿時間
   }) = _Like;
 
