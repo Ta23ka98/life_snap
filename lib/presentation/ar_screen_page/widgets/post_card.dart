@@ -4,6 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:life_snap/presentation/check_post_page/check_post_page.dart';
 import 'package:life_snap/presentation/check_post_page/check_post_page_notifier.dart';
 import 'package:life_snap/state/annotation_state/annotation.dart';
+import 'package:life_snap/state/like_state/like_state.dart';
 
 class PostCard extends HookConsumerWidget {
   const PostCard({super.key, required this.annotation});
@@ -11,15 +12,16 @@ class PostCard extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final _vm = ref.watch(checkPostPageNotifierProvider.notifier);
+    final _postVm = ref.watch(checkPostPageNotifierProvider.notifier);
+    final _likeVm = ref.watch(likeStateNotifierProvider.notifier);
     final _post = ref.watch(checkPostPageNotifierProvider);
+    final _likeState = ref.watch(likeStateNotifierProvider);
     final Size size = MediaQuery.of(context).size;
-    final isFavorite =
-        useState<bool>(false); // 仮でboolで定義　いいねしたpostのIdと投稿のpostのIdの比較をする
 
     useEffect(() {
       Future(() async {
-        await _vm.setPost(annotation.post);
+        await _postVm.setPost(annotation.post);
+        await _likeVm.isLikes(post: annotation.post);
       });
       return null;
     }, []);
@@ -64,7 +66,7 @@ class PostCard extends HookConsumerWidget {
                         },
                         icon: Icon(
                           Icons.favorite_border,
-                          color: isFavorite.value == true
+                          color: _likeState.isFavolit == true
                               ? Colors.pink
                               : Colors.white,
                         )),
