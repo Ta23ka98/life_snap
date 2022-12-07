@@ -73,7 +73,7 @@ class AddPostPageNotifier extends StateNotifier<Post> {
         createdAt: DateTime.now());
 
     // 投稿処理
-    await _postRepository.insert(newPost);
+    await _postRepository.insert(post: newPost);
 
     // 投稿IDを格納
     final myPost = MyPost(id: newPost.id, createdAt: DateTime.now());
