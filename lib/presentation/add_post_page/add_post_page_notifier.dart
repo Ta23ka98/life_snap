@@ -1,13 +1,11 @@
 import 'dart:io';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:geoflutterfire2/geoflutterfire2.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:life_snap/domain/entity/my_post/my_post.dart';
 import 'package:life_snap/domain/entity/post/post.dart';
 import 'package:life_snap/domain/entity/post/post_position.dart';
-import 'package:life_snap/infrastructure/provider/auth_provider.dart';
 import 'package:life_snap/infrastructure/repository/app_user_repository.dart';
 import 'package:life_snap/infrastructure/repository/image_repositrory.dart';
 import 'package:life_snap/infrastructure/repository/my_post_repository.dart';
@@ -16,7 +14,6 @@ import 'package:life_snap/infrastructure/repository/post_repository.dart';
 final addPostPageNotifierProvider =
     StateNotifierProvider<AddPostPageNotifier, Post>((ref) {
   return AddPostPageNotifier(
-      user: ref.read(userProvider),
       appUserRepository: ref.read(appUserRepositoryProvider),
       postRepository: ref.read(postRepositoryProvider),
       imageRepository: ref.read(imageRepositoryProvider),
@@ -25,18 +22,15 @@ final addPostPageNotifierProvider =
 
 class AddPostPageNotifier extends StateNotifier<Post> {
   AddPostPageNotifier({
-    required User? user,
     required PostRepository postRepository,
     required AppUserRepository appUserRepository,
     required ImageRepository imageRepository,
     required MyPostRepository myPostRepository,
-  })  : _user = user,
-        _appUserRepository = appUserRepository,
+  })  : _appUserRepository = appUserRepository,
         _postRepository = postRepository,
         _imageRepository = imageRepository,
         _myPostRepository = myPostRepository,
         super(Post.initial());
-  final User? _user;
   final AppUserRepository _appUserRepository;
   final PostRepository _postRepository;
   final ImageRepository _imageRepository;
@@ -45,16 +39,12 @@ class AddPostPageNotifier extends StateNotifier<Post> {
 
 //投稿ボタン押下時
   Future<void> addPost(
-      {required String title,
+      {required String uid,
+      required String title,
       required String content,
       required Position position,
       required File image}) async {
-    // if (_user == null) return;
-
-    // ログイン情報からUserのuidを取得
-    // final String uid = _user!.uid;
-
-    final String uid = "user1"; //仮の値
+    // final String uid = "user1"; //仮の値
 
     // DocumentReference
     final postUserRef = _appUserRepository.getDocumentRef(uid: uid);
