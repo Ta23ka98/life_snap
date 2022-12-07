@@ -35,23 +35,25 @@ void main() {
   group('CRUD', () {
     test('新規投稿を保存し、キーで読込する', () async {
       var post = makePostData(postRef, userRef);
-      await repo.insert(post);
-      final postCompare = await repo.getData(post.id);
+      await repo.insert(post: post);
+      final postCompare = await repo.getData(id: post.id);
       expect(post.title, postCompare!.title);
     });
     test('投稿を更新し、キーで読込する', () async {
       var post = makePostData(postRef, userRef);
-      await repo.insert(post);
+      await repo.insert(post: post);
       post = post.copyWith(title: 'titleUpd');
-      await repo.update(post);
-      final postCompare = await repo.getData(post.id);
+      await repo.update(post: post);
+      final postCompare = await repo.getData(id: post.id);
       expect(post.title, postCompare!.title);
     });
     test('投稿を削除し、キーで読込する（エラー）', () async {
       var post = makePostData(postRef, userRef);
-      await repo.insert(post);
-      await repo.delete(post);
-      final postCompare = await repo.getData(post.id);
+      await repo.insert(post: post);
+      await repo.delete(id: post.id);
+      final postCompare = await repo.getData(
+        id: post.id,
+      );
       expect(postCompare, null);
     });
   });
@@ -65,24 +67,28 @@ void main() {
       double radius = 1;
 
       // 地点登録
-      await repo.insert(makePostDataAddGeo(
-          postRef,
-          userRef,
-          'フォーシンズホテル東京',
-          geo.point(
-              latitude: 35.67819467060889, longitude: 139.76696386500694)));
-      await repo.insert(makePostDataAddGeo(
-          postRef,
-          userRef,
-          'Apple丸の内',
-          geo.point(
-              latitude: 35.68005096380495, longitude: 139.76364865494213)));
-      await repo.insert(makePostDataAddGeo(
-          postRef,
-          userRef,
-          '虎ノ門ヒルズ（圏外）',
-          geo.point(
-              latitude: 35.66794520317008, longitude: 139.75018415175742)));
+      await repo.insert(
+        post: makePostDataAddGeo(
+            postRef,
+            userRef,
+            'フォーシンズホテル東京',
+            geo.point(
+                latitude: 35.67819467060889, longitude: 139.76696386500694)),
+      );
+      await repo.insert(
+          post: makePostDataAddGeo(
+              postRef,
+              userRef,
+              'Apple丸の内',
+              geo.point(
+                  latitude: 35.68005096380495, longitude: 139.76364865494213)));
+      await repo.insert(
+          post: makePostDataAddGeo(
+              postRef,
+              userRef,
+              '虎ノ門ヒルズ（圏外）',
+              geo.point(
+                  latitude: 35.66794520317008, longitude: 139.75018415175742)));
 
       var postsReference = fireStore.collection('posts');
 
