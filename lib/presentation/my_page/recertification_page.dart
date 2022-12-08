@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:life_snap/presentation/my_page/my_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class ReCertificationPage extends StatefulWidget {
   const ReCertificationPage({super.key});
@@ -9,6 +10,31 @@ class ReCertificationPage extends StatefulWidget {
 }
 
 class _ReCertificationPageState extends State<ReCertificationPage> {
+  void deleteUser() async {
+    final user = FirebaseAuth.instance.currentUser;
+    final email = user?.email;
+    final AuthCredential credential = EmailAuthProvider.credential(
+        email: email.toString(), password: password);
+    try {
+      await user!.reauthenticateWithCredential(credential);
+      // ignore: avoid_print
+      print('再認証成功');
+    } catch (e) {
+      // ignore: avoid_print
+      print(e.toString());
+    }
+    if (user != null) {
+      print('ユーザーの削除完了');
+      await user.delete();
+      await FirebaseAuth.instance.signOut();
+    } else {
+      // ignore: avoid_print
+      print('再認証が必要です');
+    }
+  }
+
+  String password = '';
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -39,13 +65,17 @@ class _ReCertificationPageState extends State<ReCertificationPage> {
                     ],
                   ),
                   TextFormField(
-                      decoration: InputDecoration(
-                    fillColor: Colors.white,
-                    filled: true,
-                    contentPadding: const EdgeInsets.symmetric(vertical: 10),
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(0)),
-                  ))
+                    decoration: InputDecoration(
+                      fillColor: Colors.white,
+                      filled: true,
+                      contentPadding: const EdgeInsets.symmetric(vertical: 10),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(0)),
+                    ),
+                    onChanged: (value) {
+                      password = value;
+                    },
+                  )
                 ],
               ),
             ),
@@ -92,7 +122,9 @@ class _ReCertificationPageState extends State<ReCertificationPage> {
                                           shape: const RoundedRectangleBorder(
                                               borderRadius: BorderRadius.all(
                                                   Radius.circular(0)))),
-                                      onPressed: (() {}),
+                                      onPressed: (() async {
+                                        deleteUser();
+                                      }),
                                       child: const Text('削除する')),
                                 ),
                                 SizedBox(
