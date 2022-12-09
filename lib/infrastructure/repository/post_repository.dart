@@ -11,10 +11,11 @@ final postRepositoryProvider = Provider.autoDispose<PostRepository>((ref) =>
 
 abstract class BasePostRepository {
   DocumentReference getDocumentRef();
-  Future<Post?> getData(String id);
-  Future<void> insert(Post post);
-  Future<void> update(Post post);
-  Future<void> delete(Post post);
+  Future<Post?> getData({required String id});
+  Future<void> insert({required Post post});
+  Future<void> update({required Post post});
+  Future<void> delete({required String id});
+  Future<void> deleteAll({required List<String> ids});
   Stream<List<DocumentSnapshot>> getSearchPost({required Position position});
 }
 
@@ -31,7 +32,7 @@ class PostRepository implements BasePostRepository {
   }
 
   @override
-  Future<Post?> getData(String id) async {
+  Future<Post?> getData({required String id}) async {
     final docs = await _collectionReference.doc(id).get();
     try {
       return Post.fromDocument(docs);
@@ -41,18 +42,18 @@ class PostRepository implements BasePostRepository {
   }
 
   @override
-  Future<void> insert(Post post) async {
+  Future<void> insert({required Post post}) async {
     await post.postRef!.set(post.toJson());
   }
 
   @override
-  Future<void> update(Post post) async {
+  Future<void> update({required Post post}) async {
     await post.postRef!.update(post.toJson());
   }
 
   @override
-  Future<void> delete(Post post) async {
-    await post.postRef!.delete();
+  Future<void> delete({required String id}) async {
+    await _collectionReference.doc(id).delete();
   }
 
   @override
@@ -65,5 +66,12 @@ class PostRepository implements BasePostRepository {
     return geo
         .collection(collectionRef: _collectionReference)
         .within(center: currentLocation, radius: radius, field: 'postPosition');
+  }
+
+  @override
+  Future<void> deleteAll({required List<String> ids}) async {
+    for (var id in ids) {
+      await delete(id: id);
+    }
   }
 }

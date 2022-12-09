@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:life_snap/presentation/check_post_page/check_post_page_notifier.dart';
+import 'package:life_snap/state/like_state/like_state.dart';
 
 class CheckPostPage extends HookConsumerWidget {
   const CheckPostPage({
@@ -10,14 +10,14 @@ class CheckPostPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final _vm = ref.watch(checkPostPageNotifierProvider.notifier);
+    final _postVm = ref.watch(checkPostPageNotifierProvider.notifier);
+    final _likeVm = ref.watch(likeStateNotifierProvider.notifier);
     final _post = ref.watch(checkPostPageNotifierProvider);
+    final _likeState = ref.watch(likeStateNotifierProvider);
     final key = GlobalKey();
     final Size size = MediaQuery.of(context).size;
     final double height = size.height;
     final double width = size.width;
-    final isFavorite =
-        useState<bool>(false); // 仮でboolで定義　いいねしたpostのIdと投稿のpostのIdの比較をする
 
     return Scaffold(
       backgroundColor: Colors.black,
@@ -52,17 +52,17 @@ class CheckPostPage extends HookConsumerWidget {
                           IconButton(
                               onPressed: () async {
                                 //処理
-                                if (isFavorite.value == false) {
-                                  await _vm.increment(_post);
-                                  isFavorite.value = true;
+                                if (_likeState.isFavolit == false) {
+                                  await _likeVm.setLike(post: _post);
+                                  await _postVm.increment(_post);
                                 } else {
-                                  await _vm.decrement(_post);
-                                  isFavorite.value = false;
+                                  await _likeVm.deleteLike(post: _post);
+                                  await _postVm.decrement(_post);
                                 }
                               },
                               icon: Icon(
                                 Icons.favorite,
-                                color: isFavorite.value == true
+                                color: _likeState.isFavolit == true
                                     ? Colors.pink
                                     : Colors.white,
                                 size: 40,
