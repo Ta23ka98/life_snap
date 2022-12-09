@@ -39,7 +39,7 @@ class CheckPostPageNotifier extends StateNotifier<Post> {
         likeCount: post.likeCount!.toInt() + 1,
         postPosition: post.postPosition,
         createdAt: post.createdAt);
-    await _postRepository.update(newPost);
+    await _postRepository.update(post: newPost);
     state = newPost;
   }
 
@@ -54,13 +54,13 @@ class CheckPostPageNotifier extends StateNotifier<Post> {
         likeCount: post.likeCount!.toInt() - 1,
         postPosition: post.postPosition,
         createdAt: post.createdAt);
-    await _postRepository.update(newPost);
+    await _postRepository.update(post: newPost);
     state = newPost;
   }
 
   Future<void> deletePost(Post post) async {
     const folderName = "postFolder";
     await _imageRepository.deleteImage(folderName: folderName, id: post.id);
-    await _postRepository.delete(post);
+    await _postRepository.delete(id: post.id);
   }
 }

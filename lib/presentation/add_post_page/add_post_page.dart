@@ -3,10 +3,11 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:life_snap/common/functions.dart';
+// import 'package:life_snap/infrastructure/provider/auth_provider.dart';
 import 'package:life_snap/presentation/add_post_page/add_post_page_notifier.dart';
 
 import '../../state/image_state/image_state.dart';
-import 'widget/circular_widget.dart';
+import '../widget/circular_widget.dart';
 
 class AddPostPage extends HookConsumerWidget {
   const AddPostPage({super.key});
@@ -29,7 +30,16 @@ class AddPostPage extends HookConsumerWidget {
         heading: 0,
         speed: 0,
         speedAccuracy: 0));
-    final vm = ref.watch(addPostPageNotifierProvider.notifier);
+
+    // late String _uid;
+    // final _user = ref.read(userProvider);
+
+    // if (_user != null) {
+    //   _uid = _user.uid;
+    // }
+
+    const String _uid = "user1";
+    final _vm = ref.watch(addPostPageNotifierProvider.notifier);
     final _isLoading = useState<bool>(false);
 
     useEffect(() {
@@ -147,7 +157,8 @@ class AddPostPage extends HookConsumerWidget {
                             if (_formKey.currentState!.validate()) {
                               _formKey.currentState!.save();
                               _isLoading.value = true;
-                              await vm.addPost(
+                              await _vm.addPost(
+                                  uid: _uid,
                                   title: _titleController.text,
                                   content: _contentController.text,
                                   image: _imageFile!,
