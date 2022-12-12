@@ -81,6 +81,9 @@ class SegueProfile extends StatefulWidget {
 class _SegueProfileState extends State<SegueProfile> {
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final height = size.height;
+    final width = size.width;
     return GestureDetector(
         onTap: () {
           Navigator.push(
@@ -88,7 +91,6 @@ class _SegueProfileState extends State<SegueProfile> {
               MaterialPageRoute(
                   builder: ((context) => const ReCertificationPage())));
         },
-
         child: Container(
           height: height / 8,
           width: width,
