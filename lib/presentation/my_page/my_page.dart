@@ -16,7 +16,7 @@ class _MyPageState extends State<MyPage> {
       appBar: AppBar(backgroundColor: Colors.black),
       body: Column(
         children: const [
-          Profile(),
+          SegueProfile(),
           InfoList(
             icon: Icons.location_pin,
             text: "投稿一覧",
