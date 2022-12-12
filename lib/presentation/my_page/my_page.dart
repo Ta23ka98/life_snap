@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:life_snap/presentation/my_page/recertification_page.dart';
+import 'package:life_snap/presentation/check_post_page/check_post_page.dart';
 
 class MyPage extends StatefulWidget {
   const MyPage({super.key});
@@ -16,18 +17,21 @@ class _MyPageState extends State<MyPage> {
       appBar: AppBar(backgroundColor: Colors.black),
       body: Column(
         children: const [
-          SegueProfile(),
+          Profile(),
           InfoList(
             icon: Icons.location_pin,
             text: "投稿一覧",
+            segue: CheckPostPage(),
           ),
           InfoList(
             icon: Icons.favorite_border,
             text: "いいねした投稿",
+            segue: '',
           ),
           InfoList(
             icon: Icons.more_horiz,
             text: "アカウント管理",
+            segue: ReCertificationPage(),
           )
         ],
       ),
@@ -120,11 +124,9 @@ class _SegueProfileState extends State<SegueProfile> {
 class InfoList extends StatelessWidget {
   final IconData icon;
   final String text;
-  const InfoList({
-    super.key,
-    required this.icon,
-    required this.text,
-  });
+  final dynamic segue;
+  const InfoList(
+      {super.key, required this.icon, required this.text, required this.segue});
 
   @override
   Widget build(BuildContext context) {
@@ -133,7 +135,8 @@ class InfoList extends StatelessWidget {
     final width = size.width;
     return GestureDetector(
         onTap: () {
-          //ページ遷移
+          Navigator.push(
+              context, MaterialPageRoute(builder: ((context) => segue)));
         },
         child: SizedBox(
           height: height / 8,
