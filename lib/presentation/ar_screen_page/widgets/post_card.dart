@@ -17,11 +17,19 @@ class PostCard extends HookConsumerWidget {
     final _post = ref.watch(checkPostPageNotifierProvider);
     final _likeState = ref.watch(likeStateNotifierProvider);
     final Size size = MediaQuery.of(context).size;
+    // late String _uid;
+    // final _user = ref.read(userProvider);
+
+    // if (_user != null) {
+    //   _uid = _user.uid;
+    // }
+
+    const String _uid = "user1";
 
     useEffect(() {
       Future(() async {
         await _postVm.setPost(annotation.post);
-        await _likeVm.isLikes(post: annotation.post);
+        await _likeVm.isLikes(uid: _uid, post: annotation.post);
       });
       return null;
     }, []);
@@ -65,7 +73,7 @@ class PostCard extends HookConsumerWidget {
                           // isFavorite.value == true ? false : true;
                         },
                         icon: Icon(
-                          Icons.favorite_border,
+                          Icons.favorite,
                           color: _likeState.isFavolit == true
                               ? Colors.pink
                               : Colors.white,

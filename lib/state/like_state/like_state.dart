@@ -28,56 +28,44 @@ final likeStateNotifierProvider =
 class LikeStateNotifier extends StateNotifier<LikeState> {
   LikeStateNotifier(
       {required User? user, required LikeRepository likeRepository})
-      :
-        // _user = user,
-        _likeRepository = likeRepository,
+      : _likeRepository = likeRepository,
         super(const LikeState());
 
-  // final User? _user;
   final LikeRepository _likeRepository;
 
-  Future<void> isLikes({required Post post}) async {
-    // if (_user == null) return;
-    // final String uid = _user!.uid;
-    final String uid = "user1"; //仮の値
+  Future<void> isLikes({required String uid, required Post post}) async {
     final String id = post.id;
 
-    final isFavolit = await _likeRepository.isLikes(uid: uid, id: id);
+    final isFavolit = await _likeRepository.isLikes(id: id, uid: uid);
     state = state.copyWith(isFavolit: isFavolit);
   }
 
-  Future<void> setLike({required Post post}) async {
-    // if (_user == null) return;
-    // final String uid = _user!.uid;
-    final String uid = "user1"; //仮の値
+  Future<void> setLike({required String uid, required Post post}) async {
     final String id = post.id;
-
-    final newLike = Like(id: id, createdAt: DateTime.now());
+    final newLike = Like(id: uid, createdAt: DateTime.now());
     await _likeRepository.insert(
-      uid: uid,
       like: newLike,
       id: id,
+      uid: uid,
     );
     state = state.copyWith(isFavolit: true);
   }
 
-  Future<void> deleteLike({required Post post}) async {
-    // if (_user == null) return;
-    // final String uid = _user!.uid;
-    final String uid = "user1"; //仮の値
-
-    await _likeRepository.delete(id: post.id, uid: uid);
+  Future<void> deleteLike({required uid, required Post post}) async {
+    await _likeRepository.delete(
+      uid: uid,
+      id: post.id,
+    );
     state = state.copyWith(isFavolit: false);
   }
 
-  Future<void> deleteAll() async {
-    // if (_user == null) return;
-    // final String uid = _user!.uid;
-    final String uid = "user1"; //仮の値
-    final List<String> ids = await _likeRepository.getIds(uid: uid);
-    if (ids == []) {
+  Future<void> deleteAll({
+    required String id,
+  }) async {
+    final List<String> uids = await _likeRepository.getIds(id: id);
+    if (uids == []) {
       return;
     }
-    await _likeRepository.deleteAll(ids: ids, uid: uid);
+    await _likeRepository.deleteAll(id: id, uids: uids);
   }
 }

@@ -145,12 +145,14 @@ class AddPostPage extends HookConsumerWidget {
                     Stack(alignment: AlignmentDirectional.center, children: [
                       ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            padding: const EdgeInsets.only(
-                                left: 120, top: 10, right: 120, bottom: 10),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 120,
+                              vertical: 10,
+                            ),
                             elevation: 1.0,
-                            textStyle: TextStyle(
+                            backgroundColor: Theme.of(context).primaryColor,
+                            textStyle: const TextStyle(
                               color: Colors.white,
-                              backgroundColor: Theme.of(context).primaryColor,
                             ),
                           ),
                           onPressed: () async {

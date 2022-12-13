@@ -2,6 +2,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:life_snap/common/print_log.dart';
 import 'package:life_snap/domain/entity/post/post.dart';
 import 'package:life_snap/infrastructure/repository/image_repositrory.dart';
+import 'package:life_snap/infrastructure/repository/my_post_repository.dart';
 import 'package:life_snap/infrastructure/repository/post_repository.dart';
 
 final checkPostPageNotifierProvider =
@@ -10,19 +11,23 @@ final checkPostPageNotifierProvider =
   ref.onDispose(() => printLog(value: 'checkPostPageNotifierProvider dispose'));
   return CheckPostPageNotifier(
       postRepository: ref.read(postRepositoryProvider),
-      imageRepository: ref.read(imageRepositoryProvider));
+      imageRepository: ref.read(imageRepositoryProvider),
+      myPostRepository: ref.read(myPostRepositoryProvider));
 });
 
 class CheckPostPageNotifier extends StateNotifier<Post> {
   CheckPostPageNotifier(
       {required PostRepository postRepository,
-      required ImageRepository imageRepository})
+      required ImageRepository imageRepository,
+      required MyPostRepository myPostRepository})
       : _postRepository = postRepository,
         _imageRepository = imageRepository,
+        _myPostRepository = myPostRepository,
         super(Post.initial());
 
   final PostRepository _postRepository;
   final ImageRepository _imageRepository;
+  final MyPostRepository _myPostRepository;
 
   Future<void> setPost(Post post) async {
     state = post;
@@ -60,6 +65,7 @@ class CheckPostPageNotifier extends StateNotifier<Post> {
 
   Future<void> deletePost(Post post) async {
     const folderName = "postFolder";
+    await _myPostRepository.delete(uid: post.postUserRef!.id, id: post.id);
     await _imageRepository.deleteImage(folderName: folderName, id: post.id);
     await _postRepository.delete(id: post.id);
   }
