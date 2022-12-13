@@ -19,16 +19,13 @@ class _ReCertificationPageState extends State<ReCertificationPage> {
       await user!.reauthenticateWithCredential(credential);
       // ignore: avoid_print
       print('再認証成功');
+      await user.delete();
+      await FirebaseAuth.instance.signOut();
+      // ignore: avoid_print
+      print('ユーザーの削除完了');
     } catch (e) {
       // ignore: avoid_print
       print(e.toString());
-    }
-    if (user != null) {
-      // ignore: avoid_print
-      print('ユーザーの削除完了');
-      await user.delete();
-      await FirebaseAuth.instance.signOut();
-    } else {
       // ignore: avoid_print
       print('再認証が必要です');
     }
