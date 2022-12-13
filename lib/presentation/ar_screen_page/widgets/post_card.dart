@@ -76,12 +76,6 @@ class PostCard extends HookConsumerWidget {
                     )
                   ],
                 ),
-                IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.share,
-                      color: Colors.white,
-                    ))
               ],
             ),
           ],
