@@ -1,35 +1,37 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:life_snap/domain/entity/like/like.dart';
+import 'package:life_snap/domain/entity/liked_user/liked_user.dart';
 import 'package:life_snap/domain/entity/post/post.dart';
 import 'package:life_snap/infrastructure/provider/auth_provider.dart';
 import 'package:life_snap/infrastructure/repository/like_repository.dart';
 
 import '../../common/print_log.dart';
 
-part 'like_state.freezed.dart';
+part 'liked_user_state.freezed.dart';
 
 @freezed
-class LikeState with _$LikeState {
-  const factory LikeState({bool? isFavolit}) = _LikeState;
+class LikedUserState with _$LikedUserState {
+  const factory LikedUserState({bool? isFavolit}) = _LikedUserState;
 }
 
-final likeStateNotifierProvider =
-    StateNotifierProvider.autoDispose<LikeStateNotifier, LikeState>((ref) {
-  printLog(value: 'likeStateNotifierProvider init');
-  ref.onDispose(() => printLog(value: 'likeStateNotifierProvider dispose'));
-  return LikeStateNotifier(
+final likedUserStateNotifierProvider =
+    StateNotifierProvider.autoDispose<LikedUserStateNotifier, LikedUserState>(
+        (ref) {
+  printLog(value: 'likedUserStateNotifierProvider init');
+  ref.onDispose(
+      () => printLog(value: 'likedUserStateNotifierProvider dispose'));
+  return LikedUserStateNotifier(
     user: ref.read(userProvider),
     likeRepository: ref.read(likeRepositoryProvider),
   );
 });
 
-class LikeStateNotifier extends StateNotifier<LikeState> {
-  LikeStateNotifier(
+class LikedUserStateNotifier extends StateNotifier<LikedUserState> {
+  LikedUserStateNotifier(
       {required User? user, required LikeRepository likeRepository})
       : _likeRepository = likeRepository,
-        super(const LikeState());
+        super(const LikedUserState());
 
   final LikeRepository _likeRepository;
 
@@ -42,7 +44,7 @@ class LikeStateNotifier extends StateNotifier<LikeState> {
 
   Future<void> setLike({required String uid, required Post post}) async {
     final String id = post.id;
-    final newLike = Like(id: uid, createdAt: DateTime.now());
+    final newLike = LikedUser(id: uid, createdAt: DateTime.now());
     await _likeRepository.insert(
       like: newLike,
       id: id,

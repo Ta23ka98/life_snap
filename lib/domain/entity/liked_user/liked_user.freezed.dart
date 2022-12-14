@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'like.dart';
+part of 'liked_user.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,33 +14,34 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-Like _$LikeFromJson(Map<String, dynamic> json) {
-  return _Like.fromJson(json);
+LikedUser _$LikedUserFromJson(Map<String, dynamic> json) {
+  return _LikedUser.fromJson(json);
 }
 
 /// @nodoc
-mixin _$Like {
-  String? get id => throw _privateConstructorUsedError; // likeした投稿ID
+mixin _$LikedUser {
+  String? get id => throw _privateConstructorUsedError; // いいねを押したUserのId
   @TimestampConverter()
   DateTime? get createdAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $LikeCopyWith<Like> get copyWith => throw _privateConstructorUsedError;
+  $LikedUserCopyWith<LikedUser> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $LikeCopyWith<$Res> {
-  factory $LikeCopyWith(Like value, $Res Function(Like) then) =
-      _$LikeCopyWithImpl<$Res, Like>;
+abstract class $LikedUserCopyWith<$Res> {
+  factory $LikedUserCopyWith(LikedUser value, $Res Function(LikedUser) then) =
+      _$LikedUserCopyWithImpl<$Res, LikedUser>;
   @useResult
   $Res call({String? id, @TimestampConverter() DateTime? createdAt});
 }
 
 /// @nodoc
-class _$LikeCopyWithImpl<$Res, $Val extends Like>
-    implements $LikeCopyWith<$Res> {
-  _$LikeCopyWithImpl(this._value, this._then);
+class _$LikedUserCopyWithImpl<$Res, $Val extends LikedUser>
+    implements $LikedUserCopyWith<$Res> {
+  _$LikedUserCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -67,18 +68,21 @@ class _$LikeCopyWithImpl<$Res, $Val extends Like>
 }
 
 /// @nodoc
-abstract class _$$_LikeCopyWith<$Res> implements $LikeCopyWith<$Res> {
-  factory _$$_LikeCopyWith(_$_Like value, $Res Function(_$_Like) then) =
-      __$$_LikeCopyWithImpl<$Res>;
+abstract class _$$_LikedUserCopyWith<$Res> implements $LikedUserCopyWith<$Res> {
+  factory _$$_LikedUserCopyWith(
+          _$_LikedUser value, $Res Function(_$_LikedUser) then) =
+      __$$_LikedUserCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String? id, @TimestampConverter() DateTime? createdAt});
 }
 
 /// @nodoc
-class __$$_LikeCopyWithImpl<$Res> extends _$LikeCopyWithImpl<$Res, _$_Like>
-    implements _$$_LikeCopyWith<$Res> {
-  __$$_LikeCopyWithImpl(_$_Like _value, $Res Function(_$_Like) _then)
+class __$$_LikedUserCopyWithImpl<$Res>
+    extends _$LikedUserCopyWithImpl<$Res, _$_LikedUser>
+    implements _$$_LikedUserCopyWith<$Res> {
+  __$$_LikedUserCopyWithImpl(
+      _$_LikedUser _value, $Res Function(_$_LikedUser) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -87,7 +91,7 @@ class __$$_LikeCopyWithImpl<$Res> extends _$LikeCopyWithImpl<$Res, _$_Like>
     Object? id = freezed,
     Object? createdAt = freezed,
   }) {
-    return _then(_$_Like(
+    return _then(_$_LikedUser(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -102,28 +106,29 @@ class __$$_LikeCopyWithImpl<$Res> extends _$LikeCopyWithImpl<$Res, _$_Like>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Like implements _Like {
-  _$_Like({this.id, @TimestampConverter() this.createdAt});
+class _$_LikedUser implements _LikedUser {
+  _$_LikedUser({this.id, @TimestampConverter() this.createdAt});
 
-  factory _$_Like.fromJson(Map<String, dynamic> json) => _$$_LikeFromJson(json);
+  factory _$_LikedUser.fromJson(Map<String, dynamic> json) =>
+      _$$_LikedUserFromJson(json);
 
   @override
   final String? id;
-// likeした投稿ID
+// いいねを押したUserのId
   @override
   @TimestampConverter()
   final DateTime? createdAt;
 
   @override
   String toString() {
-    return 'Like(id: $id, createdAt: $createdAt)';
+    return 'LikedUser(id: $id, createdAt: $createdAt)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Like &&
+            other is _$_LikedUser &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt));
@@ -136,30 +141,32 @@ class _$_Like implements _Like {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_LikeCopyWith<_$_Like> get copyWith =>
-      __$$_LikeCopyWithImpl<_$_Like>(this, _$identity);
+  _$$_LikedUserCopyWith<_$_LikedUser> get copyWith =>
+      __$$_LikedUserCopyWithImpl<_$_LikedUser>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_LikeToJson(
+    return _$$_LikedUserToJson(
       this,
     );
   }
 }
 
-abstract class _Like implements Like {
-  factory _Like(
+abstract class _LikedUser implements LikedUser {
+  factory _LikedUser(
       {final String? id,
-      @TimestampConverter() final DateTime? createdAt}) = _$_Like;
+      @TimestampConverter() final DateTime? createdAt}) = _$_LikedUser;
 
-  factory _Like.fromJson(Map<String, dynamic> json) = _$_Like.fromJson;
+  factory _LikedUser.fromJson(Map<String, dynamic> json) =
+      _$_LikedUser.fromJson;
 
   @override
   String? get id;
-  @override // likeした投稿ID
+  @override // いいねを押したUserのId
   @TimestampConverter()
   DateTime? get createdAt;
   @override
   @JsonKey(ignore: true)
-  _$$_LikeCopyWith<_$_Like> get copyWith => throw _privateConstructorUsedError;
+  _$$_LikedUserCopyWith<_$_LikedUser> get copyWith =>
+      throw _privateConstructorUsedError;
 }
