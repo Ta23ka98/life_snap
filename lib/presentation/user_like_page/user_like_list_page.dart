@@ -14,6 +14,10 @@ class _UserLikeListPageState extends State<UserLikeListPage> {
     final Size size = MediaQuery.of(context).size;
     final double height = size.height;
     final double width = size.width;
+    const String imageURL =
+        "https://www.bing.com/th?id=OIP.NGeQUv4Bg5uJOljwF0b_ggHaFj&w=176&h=185&c=8&rs=1&qlt=90&o=6&dpr=1.5&pid=3.1&rm=2";
+    const String text =
+        "朝起きると、まずは目の前の川に飛び込む。その後はキャンプファイヤーをしながらTwitterを開こうとすると圏外なので、もう一度川に入って忘れることにする。\nその後は車で街までドライブし、戻ってきてから魚を釣って夕食にする。";
     return Scaffold(
         backgroundColor: Colors.black,
         appBar: AppBar(
@@ -30,7 +34,11 @@ class _UserLikeListPageState extends State<UserLikeListPage> {
                       context,
                       MaterialPageRoute(
                         builder: ((context) {
-                          return const UserLikeCheckPage();
+                          return const UserLikeCheckPage(
+                              title: "モーニングルーティン",
+                              imageURL: imageURL,
+                              favCount: 74,
+                              text: text);
                         }),
                       ),
                     );
@@ -54,8 +62,7 @@ class _UserLikeListPageState extends State<UserLikeListPage> {
                           height: height * 0.3,
                           decoration: const BoxDecoration(
                             image: DecorationImage(
-                                image: NetworkImage(
-                                    "https://www.bing.com/th?id=OIP.NGeQUv4Bg5uJOljwF0b_ggHaFj&w=176&h=185&c=8&rs=1&qlt=90&o=6&dpr=1.5&pid=3.1&rm=2"),
+                                image: NetworkImage(imageURL),
                                 fit: BoxFit.fitWidth),
                           ),
                         ),
@@ -78,7 +85,7 @@ class _UserLikeListPageState extends State<UserLikeListPage> {
                           height: height * 0.069,
                           width: width * 0.8,
                           child: const Text(
-                            "朝起きると、まずは目の前の川に飛び込む。その後はキャンプファイヤーをしながらTwitterを開こうとすると圏外なので、もう一度",
+                            text,
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(color: Colors.white),
