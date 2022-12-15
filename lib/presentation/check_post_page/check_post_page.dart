@@ -15,7 +15,7 @@ class CheckPostPage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final _postVm = ref.watch(checkPostPageNotifierProvider.notifier);
     final _likeVm = ref.watch(likeStateNotifierProvider.notifier);
-    final _post = ref.watch(checkPostPageNotifierProvider);
+    final _postState = ref.watch(checkPostPageNotifierProvider);
     final _likeState = ref.watch(likeStateNotifierProvider);
     final key = GlobalKey();
     final Size size = MediaQuery.of(context).size;
@@ -32,8 +32,8 @@ class CheckPostPage extends HookConsumerWidget {
 
     const String _uid = "user1";
     late String _id;
-    if (_post.postUserRef != null) {
-      _id = _post.postUserRef!.id;
+    if (_postState.post!.postUserRef != null) {
+      _id = _postState.post!.postUserRef!.id;
     } else {
       _id = "";
     }
@@ -42,7 +42,7 @@ class CheckPostPage extends HookConsumerWidget {
       backgroundColor: Colors.black,
       appBar: AppBar(
         backgroundColor: Colors.black,
-        title: Text(_post.title),
+        title: Text(_postState.post!.title),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -54,7 +54,7 @@ class CheckPostPage extends HookConsumerWidget {
                 width: width * 1,
                 color: Colors.black12,
                 child: Image.network(
-                  _post.postImageURL!,
+                  _postState.post!.postImageURL!,
                   fit: BoxFit.cover,
                 )),
             Padding(
@@ -64,11 +64,15 @@ class CheckPostPage extends HookConsumerWidget {
                   IconButton(
                       onPressed: () async {
                         if (_likeState.isFavolit == false) {
-                          await _likeVm.setLike(uid: _uid, post: _post);
-                          await _postVm.increment(_post);
+                          await _likeVm.setLike(
+                              uid: _uid, post: _postState.post!);
+                          await _postVm.increment(
+                              uid: _uid, post: _postState.post!);
                         } else {
-                          await _likeVm.deleteLike(uid: _uid, post: _post);
-                          await _postVm.decrement(_post);
+                          await _likeVm.deleteLike(
+                              uid: _uid, post: _postState.post!);
+                          await _postVm.decrement(
+                              uid: _uid, post: _postState.post!);
                         }
                       },
                       icon: Icon(
@@ -81,7 +85,7 @@ class CheckPostPage extends HookConsumerWidget {
                   Padding(
                     padding: const EdgeInsets.only(left: 10, top: 10),
                     child: Text(
-                      _post.likeCount.toString(),
+                      _postState.post!.likeCount.toString(),
                       style: const TextStyle(color: Colors.white, fontSize: 25),
                     ),
                   ),
@@ -95,7 +99,7 @@ class CheckPostPage extends HookConsumerWidget {
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Text(
-                  _post.content,
+                  _postState.post!.content,
                   style: const TextStyle(color: Colors.white, fontSize: 20),
                 ),
               ),
@@ -122,9 +126,10 @@ class CheckPostPage extends HookConsumerWidget {
                               onPressed: () async {
                                 _isLoading.value = true;
                                 await _likeVm.deleteLike(
-                                    uid: _uid, post: _post);
+                                    uid: _uid, post: _postState.post!);
 
-                                await _postVm.deletePost(_post);
+                                await _postVm.deletePost(
+                                    uid: _uid, post: _postState.post!);
                                 Navigator.pop(context);
                               },
                               child: const Text(
