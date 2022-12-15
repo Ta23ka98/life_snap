@@ -125,8 +125,8 @@ class CheckPostPage extends HookConsumerWidget {
                               ),
                               onPressed: () async {
                                 _isLoading.value = true;
-                                await _likeVm.deleteLike(
-                                    uid: _uid, post: _postState.post!);
+                                await _likeVm.deleteAll(
+                                    id: _postState.post!.id);
 
                                 await _postVm.deletePost(
                                     uid: _uid, post: _postState.post!);

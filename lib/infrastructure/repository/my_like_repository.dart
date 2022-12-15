@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:life_snap/domain/entity/liked_user/liked_user.dart';
 import 'package:life_snap/domain/entity/my_like/my_like.dart';
 import 'package:life_snap/infrastructure/provider/app_user_providers.dart';
 
-final myLikeRepositoryProvider =
-    Provider.autoDispose<MyLikeRepository>((ref) {
+final myLikeRepositoryProvider = Provider.autoDispose<MyLikeRepository>((ref) {
   return MyLikeRepository(
       collectionReference: ref.read(userCollectionReferenceProvider));
 });
@@ -14,6 +14,8 @@ abstract class BaseMyLikeRepository {
   Future<List<MyLike>> getMyLikes({required String uid});
   Future<void> insert({required String uid, required MyLike myLike});
   Future<void> delete({required uid, required String id});
+  Future<void> deleteAll(
+      {required String id, required List<LikedUser> likedUsers});
 }
 
 class MyLikeRepository implements BaseMyLikeRepository {
@@ -46,5 +48,13 @@ class MyLikeRepository implements BaseMyLikeRepository {
   Future<void> delete({required uid, required String id}) async {
     final myLikeRef = getCollectionRef(uid: uid);
     await myLikeRef.doc(id).delete();
+  }
+
+  @override
+  Future<void> deleteAll(
+      {required String id, required List<LikedUser> likedUsers}) async {
+    for (var likedUser in likedUsers) {
+      delete(uid: likedUser.id, id: id);
+    }
   }
 }
