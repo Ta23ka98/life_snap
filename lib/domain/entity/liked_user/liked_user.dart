@@ -9,6 +9,8 @@ part 'liked_user.g.dart';
 class LikedUser with _$LikedUser {
   factory LikedUser({
     String? id, // いいねを押したUserのId
+     @DocumentReferenceConverter()
+        DocumentReference? postUserRef,
     @TimestampConverter() DateTime? createdAt, // 投稿時間
   }) = _LikedUser;
 

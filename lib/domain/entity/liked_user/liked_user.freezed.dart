@@ -21,6 +21,9 @@ LikedUser _$LikedUserFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$LikedUser {
   String? get id => throw _privateConstructorUsedError; // いいねを押したUserのId
+  @DocumentReferenceConverter()
+  DocumentReference<Object?>? get postUserRef =>
+      throw _privateConstructorUsedError;
   @TimestampConverter()
   DateTime? get createdAt => throw _privateConstructorUsedError;
 
@@ -35,7 +38,10 @@ abstract class $LikedUserCopyWith<$Res> {
   factory $LikedUserCopyWith(LikedUser value, $Res Function(LikedUser) then) =
       _$LikedUserCopyWithImpl<$Res, LikedUser>;
   @useResult
-  $Res call({String? id, @TimestampConverter() DateTime? createdAt});
+  $Res call(
+      {String? id,
+      @DocumentReferenceConverter() DocumentReference<Object?>? postUserRef,
+      @TimestampConverter() DateTime? createdAt});
 }
 
 /// @nodoc
@@ -52,6 +58,7 @@ class _$LikedUserCopyWithImpl<$Res, $Val extends LikedUser>
   @override
   $Res call({
     Object? id = freezed,
+    Object? postUserRef = freezed,
     Object? createdAt = freezed,
   }) {
     return _then(_value.copyWith(
@@ -59,6 +66,10 @@ class _$LikedUserCopyWithImpl<$Res, $Val extends LikedUser>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
+      postUserRef: freezed == postUserRef
+          ? _value.postUserRef
+          : postUserRef // ignore: cast_nullable_to_non_nullable
+              as DocumentReference<Object?>?,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -74,7 +85,10 @@ abstract class _$$_LikedUserCopyWith<$Res> implements $LikedUserCopyWith<$Res> {
       __$$_LikedUserCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? id, @TimestampConverter() DateTime? createdAt});
+  $Res call(
+      {String? id,
+      @DocumentReferenceConverter() DocumentReference<Object?>? postUserRef,
+      @TimestampConverter() DateTime? createdAt});
 }
 
 /// @nodoc
@@ -89,6 +103,7 @@ class __$$_LikedUserCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
+    Object? postUserRef = freezed,
     Object? createdAt = freezed,
   }) {
     return _then(_$_LikedUser(
@@ -96,6 +111,10 @@ class __$$_LikedUserCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
+      postUserRef: freezed == postUserRef
+          ? _value.postUserRef
+          : postUserRef // ignore: cast_nullable_to_non_nullable
+              as DocumentReference<Object?>?,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -107,7 +126,10 @@ class __$$_LikedUserCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_LikedUser implements _LikedUser {
-  _$_LikedUser({this.id, @TimestampConverter() this.createdAt});
+  _$_LikedUser(
+      {this.id,
+      @DocumentReferenceConverter() this.postUserRef,
+      @TimestampConverter() this.createdAt});
 
   factory _$_LikedUser.fromJson(Map<String, dynamic> json) =>
       _$$_LikedUserFromJson(json);
@@ -116,12 +138,15 @@ class _$_LikedUser implements _LikedUser {
   final String? id;
 // いいねを押したUserのId
   @override
+  @DocumentReferenceConverter()
+  final DocumentReference<Object?>? postUserRef;
+  @override
   @TimestampConverter()
   final DateTime? createdAt;
 
   @override
   String toString() {
-    return 'LikedUser(id: $id, createdAt: $createdAt)';
+    return 'LikedUser(id: $id, postUserRef: $postUserRef, createdAt: $createdAt)';
   }
 
   @override
@@ -130,13 +155,15 @@ class _$_LikedUser implements _LikedUser {
         (other.runtimeType == runtimeType &&
             other is _$_LikedUser &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.postUserRef, postUserRef) ||
+                other.postUserRef == postUserRef) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, createdAt);
+  int get hashCode => Object.hash(runtimeType, id, postUserRef, createdAt);
 
   @JsonKey(ignore: true)
   @override
@@ -155,7 +182,10 @@ class _$_LikedUser implements _LikedUser {
 abstract class _LikedUser implements LikedUser {
   factory _LikedUser(
       {final String? id,
-      @TimestampConverter() final DateTime? createdAt}) = _$_LikedUser;
+      @DocumentReferenceConverter()
+          final DocumentReference<Object?>? postUserRef,
+      @TimestampConverter()
+          final DateTime? createdAt}) = _$_LikedUser;
 
   factory _LikedUser.fromJson(Map<String, dynamic> json) =
       _$_LikedUser.fromJson;
@@ -163,6 +193,9 @@ abstract class _LikedUser implements LikedUser {
   @override
   String? get id;
   @override // いいねを押したUserのId
+  @DocumentReferenceConverter()
+  DocumentReference<Object?>? get postUserRef;
+  @override
   @TimestampConverter()
   DateTime? get createdAt;
   @override
