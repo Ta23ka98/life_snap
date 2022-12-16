@@ -5,6 +5,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:life_snap/domain/entity/post/post.dart';
 import 'package:life_snap/infrastructure/provider/post_providers.dart';
 
+import '../../domain/entity/my_like/my_like.dart';
+
 final postRepositoryProvider = Provider.autoDispose<PostRepository>((ref) =>
     PostRepository(
         collectionReference: ref.read(postCollectionReferenceProvider)));
@@ -17,6 +19,7 @@ abstract class BasePostRepository {
   Future<void> delete({required String id});
   Future<void> deleteAll({required List<String> ids});
   Stream<List<DocumentSnapshot>> getSearchPost({required Position position});
+  Future<List<Post>> getMyLike({required List<MyLike> myLikes});
 }
 
 class PostRepository implements BasePostRepository {
@@ -73,5 +76,16 @@ class PostRepository implements BasePostRepository {
     for (var id in ids) {
       await delete(id: id);
     }
+  }
+
+  @override
+  Future<List<Post>> getMyLike({required List<MyLike> myLikes}) async {
+    final List<Post> list = [];
+    for (var myLike in myLikes) {
+      final docs = await myLike.postRef!.get();
+      final post = Post.fromDocument(docs);
+      list.add(post);
+    }
+    return list;
   }
 }
