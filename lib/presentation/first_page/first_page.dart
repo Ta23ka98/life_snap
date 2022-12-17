@@ -1,6 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:life_snap/presentation/bottom_navigation/base_page.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -159,6 +160,12 @@ class _LoginContainerState extends State<LoginContainer> {
                                   email: loginEMail, password: loginPassWord))
                           .user;
                       if (user != null) {
+                        // ignore: use_build_context_synchronously
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: ((context) => const BasePage()),
+                          ),
+                        );
                         // ignore: avoid_print
                         print('ログイン完了');
                       }

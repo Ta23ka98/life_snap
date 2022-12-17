@@ -88,10 +88,9 @@ class _SegueProfileState extends State<SegueProfile> {
               MaterialPageRoute(
                   builder: ((context) => const ReCertificationPage())));
         },
-
         child: Container(
-          height: height / 8,
-          width: width,
+          // height: height / 8,
+          // width: width,
           color: Colors.white,
           child: Row(
             children: const [
