@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:life_snap/presentation/add_post_page/add_post_page.dart';
 import 'package:life_snap/presentation/bottom_navigation/tab_item.dart';
 
 final _navigatorKeys = <TabItem, GlobalKey<NavigatorState>>{
@@ -40,7 +41,14 @@ class BasePage extends HookWidget {
           ),
         ),
         backgroundColor: Colors.black,
-        onPressed: () {},
+        onPressed: () {
+          // ignore: use_build_context_synchronously
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: ((context) => const AddPostPage()),
+            ),
+          );
+        },
         child: const Icon(
           Icons.add,
         ),
