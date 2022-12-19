@@ -10,10 +10,6 @@ class PostConfirmationPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 43, 42, 42),
       appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () => {},
-        ),
         title: const Text('投稿の確認'),
         backgroundColor: Colors.black,
       ),
