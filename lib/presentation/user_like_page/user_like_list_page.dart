@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:life_snap/presentation/user_like_page/vm/user_like_page_notifier.dart';
+import 'package:life_snap/presentation/user_like_page/widget/user_like_check_page.dart';
 import 'package:life_snap/state/like_state/like_state.dart';
 
 class UserLikeListPage extends HookConsumerWidget {
@@ -65,11 +66,13 @@ class UserLikeListPage extends HookConsumerWidget {
                                             horizontal: 10),
                                         child: Column(
                                           mainAxisSize: MainAxisSize.max,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
                                           children: [
                                             Padding(
                                               padding:
                                                   const EdgeInsets.symmetric(
-                                                      vertical: 5),
+                                                      vertical: 15),
                                               child: Text(
                                                 _post.title,
                                                 style: const TextStyle(
@@ -79,17 +82,14 @@ class UserLikeListPage extends HookConsumerWidget {
                                             _post.postImageURL != null
                                                 ? GestureDetector(
                                                     onTap: () {
-                                                      //ページ遷移
-                                                      //             Navigator.push(
-                                                      //               context,
-                                                      //               MaterialPageRoute(
-                                                      //                 builder: ((context) {
-                                                      //                   return const UserLikeCheckPage(
-                                                      //                       title: "モーニングルーティン",
-                                                      //                       imageURL: imageURL,
-                                                      //                       favCount: 74,
-                                                      //                       text: text);
-                                                      //                 }),
+                                                      Navigator.push(context,
+                                                          MaterialPageRoute(
+                                                              builder:
+                                                                  ((context) {
+                                                        return UserLikeCheckPage(
+                                                          post: _post,
+                                                        );
+                                                      })));
                                                     },
                                                     child: Image.network(
                                                       _post.postImageURL!,
@@ -145,17 +145,19 @@ class UserLikeListPage extends HookConsumerWidget {
                                                 ],
                                               ),
                                             ),
-                                            // Container(
-                                            //   width: double.infinity,
-                                            //   height: 100,
-                                            //   decoration:
-                                            //       const BoxDecoration(),
-                                            //   child: Text(
-                                            //     "${_state.post!.likeCount}",
-                                            //     style: const TextStyle(
-                                            //         color: Colors.white),
-                                            //   ),
-                                            // ),
+                                            Container(
+                                              width: double.infinity,
+                                              height: 100,
+                                              decoration: const BoxDecoration(),
+                                              child: Text(
+                                                _post.content,
+                                                style: const TextStyle(
+                                                  color: Colors.white,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                ),
+                                              ),
+                                            ),
                                           ],
                                         )),
                                   ),
