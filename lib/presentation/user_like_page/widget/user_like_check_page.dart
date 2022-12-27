@@ -35,19 +35,19 @@ class UserLikeCheckPage extends StatelessWidget {
                       fit: BoxFit.cover,
                     )
                   : Container(),
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  IconButton(
-                    onPressed: () async {},
-                    icon: const Icon(Icons.favorite, color: Colors.pink),
-                  ),
-                  Text(
-                    "${post.likeCount}",
-                    style: const TextStyle(color: Colors.white),
-                  ),
-                ],
-              ),
+              // Row(
+              //   mainAxisSize: MainAxisSize.max,
+              //   children: [
+              //     IconButton(
+              //       onPressed: () async {},
+              //       icon: const Icon(Icons.favorite, color: Colors.pink),
+              //     ),
+              //     Text(
+              //       "${post.likeCount}",
+              //       style: const TextStyle(color: Colors.white),
+              //     ),
+              //   ],
+              // ),
               SizedBox(
                 width: double.infinity,
                 height: 100,
