@@ -15,7 +15,10 @@ class ArScreenPage extends HookConsumerWidget {
     final state = ref.watch(arScreenPageNotifierProvider);
 
     return Scaffold(
-        appBar: AppBar(title: const Text("LifeSnap")),
+        appBar: AppBar(
+          title: const Text("LifeSnap"),
+          centerTitle: true,
+        ),
         body: ArLocationWidget(
             annotations: state.annotations,
             showDebugInfoSensor: false,

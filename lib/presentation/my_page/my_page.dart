@@ -75,6 +75,49 @@ class _ProfileState extends State<Profile> {
   }
 }
 
+class SegueProfile extends StatefulWidget {
+  const SegueProfile({super.key});
+
+  @override
+  State<SegueProfile> createState() => _SegueProfileState();
+}
+
+class _SegueProfileState extends State<SegueProfile> {
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: ((context) => const ReCertificationPage())));
+        },
+        child: Container(
+          // height: height / 8,
+          // width: width,
+          color: Colors.white,
+          child: Row(
+            children: const [
+              SizedBox(
+                width: 20,
+              ),
+              CircleAvatar(
+                radius: 30,
+                child: Text('Avator'),
+              ),
+              SizedBox(
+                width: 40,
+              ),
+              Text(
+                'user name',
+                style: TextStyle(fontSize: 25),
+              )
+            ],
+          ),
+        ));
+  }
+}
+
 class InfoList extends StatelessWidget {
   final IconData icon;
   final String text;
