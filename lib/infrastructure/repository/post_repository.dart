@@ -59,13 +59,13 @@ class PostRepository implements BasePostRepository {
     await _collectionReference.doc(id).delete();
   }
 
+  /// デフォルト1Km内のPostを検索
   @override
   Stream<List<DocumentSnapshot<Object?>>> getSearchPost(
-      {required Position position}) {
+      {required Position position, double radius = 1}) {
     geo = GeoFlutterFire();
     GeoFirePoint currentLocation =
         geo.point(latitude: position.latitude, longitude: position.longitude);
-    double radius = 1; //1km
     return geo
         .collection(collectionRef: _collectionReference)
         .within(center: currentLocation, radius: radius, field: 'postPosition');
