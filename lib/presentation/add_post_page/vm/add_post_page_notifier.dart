@@ -44,8 +44,6 @@ class AddPostPageNotifier extends StateNotifier<Post> {
       required String content,
       required Position position,
       required File image}) async {
-    // final String uid = "user1"; //仮の値
-
     // DocumentReference
     final postUserRef = _appUserRepository.getDocumentRef(uid: uid);
 

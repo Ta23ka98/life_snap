@@ -5,7 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:life_snap/common/functions.dart';
 import 'package:life_snap/infrastructure/provider/auth_provider.dart';
 // import 'package:life_snap/infrastructure/provider/auth_provider.dart';
-import 'package:life_snap/presentation/add_post_page/add_post_page_notifier.dart';
+import 'package:life_snap/presentation/add_post_page/vm/add_post_page_notifier.dart';
 
 import '../../state/image_state/image_state.dart';
 import '../widget/circular_widget.dart';
