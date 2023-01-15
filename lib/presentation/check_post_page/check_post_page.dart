@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:life_snap/presentation/check_post_page/check_post_page_notifier.dart';
+import 'package:life_snap/infrastructure/provider/auth_provider.dart';
+import 'package:life_snap/presentation/check_post_page/vm/check_post_page_notifier.dart';
 import 'package:life_snap/state/like_state/like_state.dart';
 
 import '../widget/circular_widget.dart';
@@ -23,14 +24,13 @@ class CheckPostPage extends HookConsumerWidget {
     final double width = size.width;
     final _isLoading = useState<bool>(false);
 
-    // late String _uid;
-    // final _user = ref.read(userProvider);
+    late String _uid;
+    final _user = ref.read(userProvider);
 
-    // if (_user != null) {
-    //   _uid = _user.uid;
-    // }
+    if (_user != null) {
+      _uid = _user.uid;
+    }
 
-    const String _uid = "user1";
     late String _id;
     if (_postState.post!.postUserRef != null) {
       _id = _postState.post!.postUserRef!.id;

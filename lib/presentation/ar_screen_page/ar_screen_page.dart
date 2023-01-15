@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:life_snap/presentation/ar_screen_page/ar_screen_page_notifier.dart';
+import 'package:life_snap/presentation/ar_screen_page/vm/ar_screen_page_notifier.dart';
 import 'package:ar_location_view/ar_location_view.dart';
 import 'package:life_snap/presentation/ar_screen_page/widgets/post_card.dart';
 import 'package:life_snap/state/annotation_state/annotation.dart';

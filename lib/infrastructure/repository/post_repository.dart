@@ -81,10 +81,12 @@ class PostRepository implements BasePostRepository {
   @override
   Future<List<Post>> getMyLike({required List<MyLike> myLikes}) async {
     final List<Post> list = [];
-    for (var myLike in myLikes) {
-      final docs = await myLike.postRef!.get();
-      final post = Post.fromDocument(docs);
-      list.add(post);
+    if (myLikes != []) {
+      for (var myLike in myLikes) {
+        final docs = await myLike.postRef!.get();
+        final post = Post.fromDocument(docs);
+        list.add(post);
+      }
     }
     return list;
   }
