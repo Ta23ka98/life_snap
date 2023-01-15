@@ -47,24 +47,3 @@ class AcountManagementPage extends StatelessWidget {
     );
   }
 }
-
-// class SegueProfile extends StatefulWidget {
-//   const SegueProfile({super.key});
-
-//   @override
-//   State<SegueProfile> createState() => _SegueProfileState();
-// }
-
-// class _SegueProfileState extends State<SegueProfile> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return GestureDetector(
-//         onTap: () {
-//           Navigator.push(
-//               context,
-//               MaterialPageRoute(
-//                   builder: ((context) => const ReCertificationPage())));
-//         },
-//         child: const Profile());
-//   }
-// }
