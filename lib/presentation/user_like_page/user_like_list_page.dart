@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:life_snap/infrastructure/provider/auth_provider.dart';
 import 'package:life_snap/presentation/user_like_page/vm/user_like_page_notifier.dart';
 import 'package:life_snap/presentation/user_like_page/widget/user_like_check_page.dart';
 import 'package:life_snap/state/like_state/like_state.dart';
@@ -13,14 +14,12 @@ class UserLikeListPage extends HookConsumerWidget {
     final _vm = ref.watch(userLikePageNotifierProvider.notifier);
     final _postList = ref.watch(userLikePageNotifierProvider).posts;
 
-    // late String _uid;
-    // final _user = ref.read(userProvider);
+    late String _uid;
+    final _user = ref.read(userProvider);
 
-    // if (_user != null) {
-    //   _uid = _user.uid;
-    // }
-
-    const String _uid = "user1";
+    if (_user != null) {
+      _uid = _user.uid;
+    }
 
     useEffect(() {
       Future(() async {

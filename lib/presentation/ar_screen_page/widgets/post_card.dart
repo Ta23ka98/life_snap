@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:life_snap/infrastructure/provider/auth_provider.dart';
 import 'package:life_snap/presentation/check_post_page/check_post_page.dart';
 import 'package:life_snap/presentation/check_post_page/vm/check_post_page_notifier.dart';
 import 'package:life_snap/state/annotation_state/annotation.dart';
@@ -17,14 +18,13 @@ class PostCard extends HookConsumerWidget {
     final _postState = ref.watch(checkPostPageNotifierProvider);
     final _likeState = ref.watch(likeStateNotifierProvider);
     final Size size = MediaQuery.of(context).size;
-    // late String _uid;
-    // final _user = ref.read(userProvider);
+    late String _uid;
 
-    // if (_user != null) {
-    //   _uid = _user.uid;
-    // }
+    final _user = ref.read(userProvider);
 
-    const String _uid = "user1";
+    if (_user != null) {
+      _uid = _user.uid;
+    }
 
     useEffect(() {
       Future(() async {
