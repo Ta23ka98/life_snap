@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:life_snap/presentation/acount_management_page/acount_management_page.dart';
 import 'package:life_snap/presentation/check_post_page/check_post_page.dart';
 
+import '../acount_management_page/recertification_page.dart';
+
 class MyPage extends StatefulWidget {
   const MyPage({super.key});
 
