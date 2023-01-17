@@ -57,7 +57,3 @@ macos/firebase_app_id_file.json
 
 #fvm related
 .fvm/flutter_sdk
-
-# google-map apiKey
-ios/Runner/AppDelegate.swift
-android/app/src/main/AndroidManifest.xml
