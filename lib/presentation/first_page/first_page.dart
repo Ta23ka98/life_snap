@@ -5,7 +5,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:life_snap/presentation/my_page/my_page.dart';
 import 'package:life_snap/presentation/bottom_navigation/base_page.dart';
 
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -175,7 +174,7 @@ class _LoginContainerState extends State<LoginContainer> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: ((context) => const MyPage())));
+                                builder: ((context) => const BasePage())));
                       }
                     } catch (e) {
                       // ignore: avoid_print

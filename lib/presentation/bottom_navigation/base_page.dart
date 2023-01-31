@@ -14,70 +14,73 @@ class BasePage extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final currentTab = useState(TabItem.search);
-    return Scaffold(
-      body: Stack(
-        children: TabItem.values
-            .map(
-              (tabItem) => Offstage(
-                offstage: currentTab.value != tabItem,
-                child: Navigator(
-                  key: _navigatorKeys[tabItem],
-                  onGenerateRoute: (settings) {
-                    return MaterialPageRoute<Widget>(
-                      builder: (context) => tabItem.page,
-                    );
-                  },
+    return MaterialApp(
+      home: Scaffold(
+        body: Stack(
+          children: TabItem.values
+              .map(
+                (tabItem) => Offstage(
+                  offstage: currentTab.value != tabItem,
+                  child: Navigator(
+                    key: _navigatorKeys[tabItem],
+                    onGenerateRoute: (settings) {
+                      return MaterialPageRoute<Widget>(
+                        builder: (context) => tabItem.page,
+                      );
+                    },
+                  ),
                 ),
-              ),
-            )
-            .toList(),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: FloatingActionButton(
-        shape: const CircleBorder(
-          side: BorderSide(
-            color: Color.fromARGB(255, 134, 132, 132), //色
-            width: 5, //太さ
-          ),
+              )
+              .toList(),
         ),
-        backgroundColor: Colors.black,
-        onPressed: () {
-          // ignore: use_build_context_synchronously
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: ((context) => const AddPostPage()),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButton: FloatingActionButton(
+          heroTag: 'hero3',
+          shape: const CircleBorder(
+            side: BorderSide(
+              color: Color.fromARGB(255, 134, 132, 132), //色
+              width: 5, //太さ
             ),
-          );
-        },
-        child: const Icon(
-          Icons.add,
-        ),
-        elevation: 0.0,
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        unselectedItemColor: Colors.white,
-        backgroundColor: Colors.black,
-        type: BottomNavigationBarType.fixed,
-        currentIndex: TabItem.values.indexOf(currentTab.value),
-        items: TabItem.values
-            .map(
-              (tabItem) => BottomNavigationBarItem(
-                icon: Icon(tabItem.icon),
-                label: tabItem.title,
+          ),
+          backgroundColor: Colors.black,
+          onPressed: () {
+            // ignore: use_build_context_synchronously
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: ((context) => const AddPostPage()),
               ),
-            )
-            .toList(),
-        onTap: (index) {
-          final selectedTab = TabItem.values[index];
-          if (currentTab.value == selectedTab) {
-            _navigatorKeys[selectedTab]
-                ?.currentState
-                ?.popUntil((route) => route.isFirst);
-          } else {
-            // 未選択
-            currentTab.value = selectedTab;
-          }
-        },
+            );
+          },
+          child: const Icon(
+            Icons.add,
+          ),
+          elevation: 0.0,
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          unselectedItemColor: Colors.white,
+          backgroundColor: Colors.black,
+          type: BottomNavigationBarType.fixed,
+          currentIndex: TabItem.values.indexOf(currentTab.value),
+          items: TabItem.values
+              .map(
+                (tabItem) => BottomNavigationBarItem(
+                  icon: Icon(tabItem.icon),
+                  label: tabItem.title,
+                ),
+              )
+              .toList(),
+          onTap: (index) {
+            final selectedTab = TabItem.values[index];
+            if (currentTab.value == selectedTab) {
+              _navigatorKeys[selectedTab]
+                  ?.currentState
+                  ?.popUntil((route) => route.isFirst);
+            } else {
+              // 未選択
+              currentTab.value = selectedTab;
+            }
+          },
+        ),
       ),
     );
   }
