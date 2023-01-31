@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:life_snap/presentation/my_page/recertification_page.dart';
 import 'package:life_snap/presentation/post_confirmation_page/post_confirmation_page.dart';
+
+import '../acount_management_page/recertification_page.dart';
 
 class PostListPage extends StatefulWidget {
   const PostListPage({super.key});

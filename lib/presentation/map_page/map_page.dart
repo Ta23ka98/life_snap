@@ -22,38 +22,45 @@ class MapPage extends HookConsumerWidget {
       return;
     }, const []);
 
-    return Scaffold(
-        body: state.isBusy
-            ? const Center(child: CircularProgressIndicator())
-            : GoogleMap(
-                mapType: MapType.normal,
-                myLocationButtonEnabled: false,
-                myLocationEnabled: true,
-                zoomControlsEnabled: false,
-                initialCameraPosition: CameraPosition(
-                  target: state.currentLocation,
-                  zoom: 14.4746,
-                ),
-                markers: state.markers,
-                onMapCreated: notifier.onMapCreated,
-              ),
-        floatingActionButton: Column(mainAxisSize: MainAxisSize.min, children: [
-          FloatingActionButton(
-            onPressed: () async {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const ArScreenPage()));
-            },
-            backgroundColor: Colors.green,
-            child: const Icon(Icons.camera_alt),
+    return MaterialApp(
+      home: Scaffold(
+          body:
+              // state.isBusy
+              //     ? const Center(child: CircularProgressIndicator())
+              //     :
+              GoogleMap(
+            mapType: MapType.normal,
+            myLocationButtonEnabled: false,
+            myLocationEnabled: true,
+            zoomControlsEnabled: false,
+            initialCameraPosition: CameraPosition(
+              target: state.currentLocation,
+              zoom: 14.4746,
+            ),
+            markers: state.markers,
+            onMapCreated: notifier.onMapCreated,
           ),
-          const SizedBox(height: 20),
-          FloatingActionButton(
+          floatingActionButton:
+              Column(mainAxisSize: MainAxisSize.min, children: [
+            FloatingActionButton(
+              heroTag: 'hero1',
               onPressed: () async {
-                notifier.getCurrentLocation();
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const ArScreenPage()));
               },
-              child: const Icon(Icons.location_searching))
-        ]));
+              backgroundColor: Colors.green,
+              child: const Icon(Icons.camera_alt),
+            ),
+            const SizedBox(height: 20),
+            FloatingActionButton(
+                heroTag: 'hero2',
+                onPressed: () async {
+                  notifier.getCurrentLocation();
+                },
+                child: const Icon(Icons.location_searching))
+          ])),
+    );
   }
 }

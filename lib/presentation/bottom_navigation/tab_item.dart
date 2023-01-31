@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:life_snap/presentation/bottom_navigation/my_page.dart';
 
 import '../map_page/map_page.dart';
+import '../my_page/my_page.dart';
 
 enum TabItem {
   search(
