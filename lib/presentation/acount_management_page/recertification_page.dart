@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:life_snap/presentation/my_page/my_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+import '../first_page/first_page.dart';
+
 class ReCertificationPage extends StatefulWidget {
   const ReCertificationPage({super.key});
 
@@ -21,6 +23,8 @@ class _ReCertificationPageState extends State<ReCertificationPage> {
       print('再認証成功');
       await user.delete();
       await FirebaseAuth.instance.signOut();
+      // ignore: use_build_context_synchronously
+
       // ignore: avoid_print
       print('ユーザーの削除完了');
     } catch (e) {

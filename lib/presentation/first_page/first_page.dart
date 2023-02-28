@@ -170,11 +170,11 @@ class _LoginContainerState extends State<LoginContainer> {
                         );
                         // ignore: avoid_print
                         print('ログイン完了');
-                        if (!mounted) return;
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: ((context) => const BasePage())));
+                        // if (!mounted) return;
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //         builder: ((context) => const BasePage())));
                       }
                     } catch (e) {
                       // ignore: avoid_print
@@ -356,7 +356,7 @@ class _MemberRegistrationContainerState
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: ((context) => const MyPage())));
+                                builder: ((context) => const BasePage())));
                       }
                     } catch (e) {
                       // ignore: avoid_print
