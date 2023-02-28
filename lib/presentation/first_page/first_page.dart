@@ -15,6 +15,7 @@ class MyApp extends StatelessWidget {
           textTheme:
               GoogleFonts.delaGothicOneTextTheme(Theme.of(context).textTheme)),
       home: const LifesnapLogin(),
+      routes: {'first_page': (context) => const LifesnapLogin()},
     );
   }
 }
@@ -163,18 +164,18 @@ class _LoginContainerState extends State<LoginContainer> {
                           .user;
                       if (user != null) {
                         // ignore: use_build_context_synchronously
-                        Navigator.of(context).push(
+                        Navigator.of(context).pushReplacement(
                           MaterialPageRoute(
                             builder: ((context) => const BasePage()),
                           ),
                         );
                         // ignore: avoid_print
                         print('ログイン完了');
-                        if (!mounted) return;
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: ((context) => const BasePage())));
+                        // if (!mounted) return;
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //         builder: ((context) => const BasePage())));
                       }
                     } catch (e) {
                       // ignore: avoid_print
@@ -356,7 +357,7 @@ class _MemberRegistrationContainerState
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: ((context) => const MyPage())));
+                                builder: ((context) => const BasePage())));
                       }
                     } catch (e) {
                       // ignore: avoid_print
